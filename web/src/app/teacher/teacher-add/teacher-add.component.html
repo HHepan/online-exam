@@ -1,0 +1,40 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item active" aria-current="page">新增教师</li>
+  </ol>
+</nav>
+
+<form>
+  <div class="form-group row text-right">
+    <label class="col-4 col-form-label"><code>*</code>姓名</label>
+    <div class="col-4">
+      <input type="text" class="form-control">
+    </div>
+  </div>
+  <div class="form-group row ">
+    <label class="col-4 text-right col-form-label"><code>*</code>性别</label>
+    <div class="col-4 mt-2">
+      <div class="form-check form-check-inline" >
+        <input class="form-check-input" type="radio" value="true">
+        <label class="form-check-label" >男</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" value="false">
+        <label class="form-check-label" >女</label>
+      </div>
+    </div>
+  </div>
+  <div class="form-group row text-right">
+    <label class="col-4 col-form-label"><code>*</code>电话号码</label>
+    <div class="col-sm-4">
+      <input type="text" class="form-control">
+    </div>
+  </div>
+  <hr/>
+  <div class="form-group">
+    <div class="col-12 text-right">
+      <button type="button" class="btn btn-secondary mr-1" (click)="onClose()"><i class="bi bi-x"></i>关闭</button>
+      <button type="submit" class="btn btn-primary"><i class="bi bi-check-lg"></i>确定</button>
+    </div>
+  </div>
+</form>
