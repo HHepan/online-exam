@@ -33,5 +33,15 @@ export const menus: Array<BaseMenu> = [
     name: '个人中心',
     url: 'personal',
     icon: '',
+  },
+  {
+    name: '题库管理',
+    url: 'questionBank',
+    icon: '',
+  },
+  {
+    name: '考试管理',
+    url: 'exam',
+    icon: '',
   }
 ];

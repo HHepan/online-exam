@@ -58,6 +58,20 @@ const routes: Routes = [
         data: {
           component: SystemConfigComponent
         }
+      },
+      {
+        path: 'questionBank',
+        loadChildren: () => import('./question-bank/question-bank.module').then(m => m.QuestionBankModule),
+        data: {
+          title: '题库管理'
+        }
+      },
+      {
+        path: 'exam',
+        loadChildren: () => import('./exam/exam.module').then(m => m.ExamModule),
+        data: {
+          title: '考试管理'
+        }
       }
     ]
   }
