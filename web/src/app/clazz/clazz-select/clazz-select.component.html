@@ -1,0 +1,6 @@
+<select class="form-control col-sm-3"  id="clazz" [formControl]="clazzSelected">
+  <option [value]="null">请选择</option>
+  <option *ngFor="let clazz of allClazz" [value]="clazz.id">
+    {{clazz.name}}
+  </option>
+</select>

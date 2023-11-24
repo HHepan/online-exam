@@ -12,7 +12,6 @@ import {TeacherService} from "../../../service/teacher.service";
 export class TeacherAddComponent {
   formGroup = new FormGroup({
     name: new FormControl('', [Validators.required]),
-    sex: new FormControl('', [Validators.required]),
     phone: new FormControl('', [Validators.required]),
   });
 
@@ -29,10 +28,11 @@ export class TeacherAddComponent {
   }
 
   onSubmit() {
-    console.log('teacher save c', this.formGroup.value);
     const teacher = this.formGroup.value as Teacher;
     this.teacherService.save(teacher).subscribe(res => {
-      console.log('teacher save c res', res);
+      this.commonService.success(() => {
+        this.onClose();
+      }, '新增成功');
     });
   }
 }
