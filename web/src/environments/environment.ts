@@ -7,8 +7,7 @@ export const environment = {
   color: 'darkcyan',
   title: '计算机专业课程在线考试管理系统',
   style: 'record',
-  // frontWebSiteUrl: 'http://192.168.0.243:8006',
-  // defaultPassword: 'hebut',
+  apiUrl: 'api',
   size: 5
 };
 

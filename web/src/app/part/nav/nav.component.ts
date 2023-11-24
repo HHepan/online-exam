@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Subscription} from 'rxjs';
-import {CommonService} from '../../service/common.service';
-import {TitleService} from '../../service/title.service';
+import {CommonService} from '../../../service/common.service';
+import {TitleService} from '../../../service/title.service';
 
 @Component({
   selector: 'app-nav',

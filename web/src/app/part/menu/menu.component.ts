@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {BaseMenu} from '../../common/base-menu';
 import { menus } from '../../common/menu.config';
-import {environment} from '../../environments/environment';
+import {environment} from '../../../environments/environment';
 import {Router} from '@angular/router';
 
 @Component({
