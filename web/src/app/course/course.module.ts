@@ -5,6 +5,9 @@ import {CourseRoutingModule} from "./course-routing.module";
 import { CourseAddComponent } from './course-add/course-add.component';
 import { CourseEditComponent } from './course-edit/course-edit.component';
 import {DialogEntryModule} from "../common/dialog-entry/dialog-entry.module";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {PageModule} from "../common/page/page.module";
+import {SizeModule} from "../common/size/size.module";
 
 
 
@@ -17,7 +20,11 @@ import {DialogEntryModule} from "../common/dialog-entry/dialog-entry.module";
   imports: [
     CommonModule,
     CourseRoutingModule,
-    DialogEntryModule
+    DialogEntryModule,
+    FormsModule,
+    ReactiveFormsModule,
+    PageModule,
+    SizeModule
   ]
 })
 export class CourseModule { }
