@@ -1,5 +1,6 @@
 package com.hepan.api.entity;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -8,12 +9,15 @@ import java.util.List;
 @Entity
 public class Clazz {
     @Id
+    @JsonView(IdJsonView.class)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @JsonView(NameJsonView.class)
     private String name;
 
     @OneToMany(mappedBy = "clazz")
+    @JsonView(StudentsJsonView.class)
     private List<Student> students = new ArrayList<>();
 
     public Long getId() { return id; }
@@ -31,4 +35,8 @@ public class Clazz {
     public void setStudents(List<Student> students) {
         this.students = students;
     }
+
+    public interface IdJsonView {}
+    public interface NameJsonView {}
+    public interface StudentsJsonView {}
 }

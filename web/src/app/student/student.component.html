@@ -2,9 +2,9 @@
   <div class="col-md-12 mt-2">
     <div class="row">
       <div class="col-8 text-left">
-        <form class="form-inline">
-          <input type="text" class="col-2 form-control mr-3" placeholder="学生姓名">
-          <input type="text" class="col-2 form-control mr-3" placeholder="学号">
+        <form class="form-inline" [formGroup]="queryForm" (ngSubmit)="onQuery()">
+          <input type="text" class="col-2 form-control mr-3" placeholder="学生姓名" formControlName="name">
+          <input type="text" class="col-2 form-control mr-3" placeholder="学号" formControlName="sno">
           <button type="submit" class="btn btn-info"><i class="fas fa-search"></i>查询</button>
         </form>
       </div>
@@ -14,30 +14,37 @@
     </div>
   </div>
   <hr>
+  <div class="row mb-2">
+    <div class="col-6 text-left">
+      <app-size [size]="pageData.size" (changeSize)="onSizeChange($event)"></app-size>
+    </div>
+  </div>
   <table class="table table-striped mt-3">
     <thead class="table-primary">
     <tr class="info">
       <th>序号</th>
-      <th>key1</th>
-      <th>key2</th>
-      <th>key3</th>
-      <th>key4</th>
+      <th>姓名</th>
+      <th>学号</th>
+      <th>班级</th>
       <th>操作</th>
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let item of [1, 2, 3, 4], index as i">
-      <td>{{ i }}</td>
-      <td>value{{ item }}</td>
-      <td>value{{ item }}</td>
-      <td>value{{ item }}</td>
-      <td>value{{ item }}</td>
+    <tr *ngFor="let student of pageData.content, index as i">
+      <td>{{ i + 1}}</td>
+      <td>{{ student.name }}</td>
+      <td>{{ student.sno }}</td>
+      <td>{{ student.clazz.name }}</td>
       <td>
         <a class="btn btn-sm btn-primary mr-2" routerLink="edit/1">编辑</a>
-        <a class="btn btn-sm btn-danger">操作2</a>
+        <a class="btn btn-sm btn-danger" (click)="onDelete(student)">删除</a>
       </td>
     </tr>
     </tbody>
   </table>
+  <app-page [page]="pageData.number"
+            [size]="pageData.size"
+            [totalElements]="pageData.totalElements"
+            (changePage)="onPageChange($event)"></app-page>
 </div>
 <router-outlet></router-outlet>

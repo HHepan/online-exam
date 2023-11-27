@@ -1,9 +1,6 @@
 package com.hepan.api.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class Teacher {
@@ -14,6 +11,10 @@ public class Teacher {
     private String name;
 
     private String phone;
+
+    @OneToOne()
+    private User user;
+
 
     public Long getId() { return id; }
 
@@ -26,4 +27,12 @@ public class Teacher {
     public String getPhone() { return phone; }
 
     public void setPhone(String phone) { this.phone = phone; }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 }

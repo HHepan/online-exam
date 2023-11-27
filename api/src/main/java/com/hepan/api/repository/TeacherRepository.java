@@ -14,7 +14,7 @@ public interface TeacherRepository extends PagingAndSortingRepository<Teacher, L
 
     default Page<Teacher> findAllByNameAndPhone(String name, String phone, Pageable pageable) {
         Specification<Teacher> specification = TeacherSpecs.containingName(name)
-                .and(TeacherSpecs.containingSno(phone));
+                .and(TeacherSpecs.containingPhone(phone));
 
         return this.findAll(specification, pageable);
     };

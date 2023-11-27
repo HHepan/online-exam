@@ -1,20 +1,28 @@
 package com.hepan.api.entity;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import jakarta.persistence.*;
 
 @Entity
 public class Student {
     @Id
+    @JsonView(IdJsonView.class)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @JsonView(NameJsonView.class)
     private String name;
 
+    @JsonView(SnoJsonView.class)
     private String sno;
 
     @ManyToOne
+    @JsonView(ClazzJsonView.class)
     @JoinColumn(name = "clazz_id")
     private Clazz clazz;
+
+    @OneToOne()
+    private User user;
 
     public Long getId() { return id; }
 
@@ -35,5 +43,18 @@ public class Student {
     public void setClazz(Clazz clazz) {
         this.clazz = clazz;
     }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public interface IdJsonView {}
+    public interface NameJsonView {}
+    public interface SnoJsonView {}
+    public interface ClazzJsonView extends Clazz.IdJsonView, Clazz.NameJsonView {}
 
 }
