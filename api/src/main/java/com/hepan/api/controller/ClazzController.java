@@ -1,5 +1,6 @@
 package com.hepan.api.controller;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import com.hepan.api.entity.Clazz;
 import com.hepan.api.service.ClazzService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,7 @@ public class ClazzController {
      * @return 分页班级
      */
     @GetMapping("page")
+    @JsonView(PageJsonView.class)
     public Page<Clazz> page(
             @RequestParam(required = false, defaultValue = "") String name,
             @SortDefault.SortDefaults(@SortDefault(sort = "id", direction = Sort.Direction.DESC))
@@ -46,6 +48,7 @@ public class ClazzController {
         return this.clazzService.save(clazz);
     }
 
+    @JsonView(PageJsonView.class)
     @GetMapping("getAll")
     public Iterable<Clazz> getAll() {
         return this.clazzService.getAll();
@@ -55,4 +58,9 @@ public class ClazzController {
     void delete(@PathVariable Long id) {
         this.clazzService.deleteById(id);
     }
+
+    private interface PageJsonView extends
+            Clazz.IdJsonView,
+            Clazz.NameJsonView
+    {}
 }

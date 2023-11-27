@@ -7,6 +7,8 @@ import { StudentEditComponent } from './student-edit/student-edit.component';
 import {DialogEntryModule} from "../common/dialog-entry/dialog-entry.module";
 import {ClazzModule} from "../clazz/clazz.module";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {SizeModule} from "../common/size/size.module";
+import {PageModule} from "../common/page/page.module";
 
 
 
@@ -22,7 +24,9 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
     DialogEntryModule,
     ClazzModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SizeModule,
+    PageModule
   ]
 })
 export class StudentModule { }

@@ -18,7 +18,7 @@ public class TeacherSpecs {
         }
     }
 
-    public static Specification<Teacher> containingSno(String phone) {
+    public static Specification<Teacher> containingPhone(String phone) {
         if (phone != null) {
             return (root, criteriaQuery, criteriaBuilder) ->
                     criteriaBuilder.like(root.get("phone").as(String.class), String.format("%%%s%%", phone));

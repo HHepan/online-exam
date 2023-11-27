@@ -10,4 +10,6 @@ public interface TeacherService {
     Page<Teacher> page(String name, String phone, Pageable pageable);
 
     void deleteById(Long id);
+
+    Teacher getById(Long id);
 }
