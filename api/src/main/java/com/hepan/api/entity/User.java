@@ -1,5 +1,6 @@
 package com.hepan.api.entity;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import jakarta.persistence.*;
 
 @Entity
@@ -10,15 +11,21 @@ public class User {
     public static Long USER_STUDENT_ROLE = 2L;
 
     @Id
+    @JsonView(IdJsonView.class)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @JsonView(UsernameJsonView.class)
     private String username;
 
+    @JsonView(PasswordJsonView.class)
     private String password;
+
+    @JsonView(RoleJsonView.class)
     private Long role;
 
     @OneToOne( mappedBy = "user")
+    @JsonView(StudentJsonView.class)
     private Student student;
 
     @OneToOne( mappedBy = "user")
@@ -47,4 +54,10 @@ public class User {
     public Teacher getTeacher() { return teacher; }
 
     public void setTeacher(Teacher teacher) { this.teacher = teacher; }
+
+    public interface IdJsonView {}
+    public interface UsernameJsonView {}
+    public interface PasswordJsonView {}
+    public interface RoleJsonView {}
+    public interface StudentJsonView {}
 }

@@ -2,10 +2,18 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {LayoutComponent} from "./part/layout/layout.component";
 import {DialogEntryComponent} from "./common/dialog-entry/dialog-entry.component";
-import {CourseEditComponent} from "./course/course-edit/course-edit.component";
 import {SystemConfigComponent} from "./system-config/system-config.component";
 
 const routes: Routes = [
+  {
+    path: '',
+    redirectTo: 'login',
+    pathMatch: 'full'
+  },
+  {
+    path: 'login',
+    loadChildren: () => import('./login/login.module').then(m => m.LoginModule)
+  },
   {
     path: '',
     component: LayoutComponent,

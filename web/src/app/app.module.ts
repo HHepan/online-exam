@@ -7,19 +7,21 @@ import {LayoutModule} from "./part/layout/layout.module";
 import { SystemConfigComponent } from './system-config/system-config.component';
 import {DialogEntryModule} from "./common/dialog-entry/dialog-entry.module";
 import {HttpClientModule} from "@angular/common/http";
+import {ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
     AppComponent,
     SystemConfigComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    LayoutModule,
-    DialogEntryModule,
-    HttpClientModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        LayoutModule,
+        DialogEntryModule,
+        HttpClientModule,
+        ReactiveFormsModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

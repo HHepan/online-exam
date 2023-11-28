@@ -1,9 +1,7 @@
 package com.hepan.api.controller;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.hepan.api.entity.Clazz;
 import com.hepan.api.entity.Student;
-import com.hepan.api.entity.Teacher;
 import com.hepan.api.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -17,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("student")
 public class StudentController {
     private StudentService studentService;
+
     @Autowired
     StudentController(StudentService studentService) {
         this.studentService = studentService;
@@ -24,6 +23,7 @@ public class StudentController {
 
     /**
      * 分页接口.
+     *
      * @param name     名称
      * @param pageable 分页数据.
      * @return 分页学生
@@ -40,7 +40,8 @@ public class StudentController {
 
     /**
      * 新增学生
-     * @param student   新增学生数据
+     *
+     * @param student 新增学生数据
      * @return 学生
      */
     @PostMapping("add")
@@ -49,10 +50,16 @@ public class StudentController {
         return this.studentService.save(student);
     }
 
+    @DeleteMapping("{id}")
+    void delete(@PathVariable Long id) {
+        this.studentService.deleteById(id);
+    }
+
     private interface PageJsonView extends
             Student.IdJsonView,
             Student.NameJsonView,
             Student.SnoJsonView,
-            Student.ClazzJsonView
+            Student.ClazzJsonView,
+            Student.UserJsonView
     {}
 }
