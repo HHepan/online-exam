@@ -22,6 +22,7 @@ public class Student {
     private Clazz clazz;
 
     @OneToOne()
+    @JsonView(UserJsonView.class)
     private User user;
 
     public Long getId() { return id; }
@@ -55,6 +56,12 @@ public class Student {
     public interface IdJsonView {}
     public interface NameJsonView {}
     public interface SnoJsonView {}
+    public interface UserJsonView extends
+            User.IdJsonView,
+            User.UsernameJsonView,
+            User.PasswordJsonView,
+            User.RoleJsonView
+    {}
     public interface ClazzJsonView extends Clazz.IdJsonView, Clazz.NameJsonView {}
 
 }

@@ -11,4 +11,6 @@ public interface StudentService {
     Page<Student> page(String name, String sno, Pageable pageable);
 
     Student getById(Long id);
+
+    void deleteById(Long id);
 }

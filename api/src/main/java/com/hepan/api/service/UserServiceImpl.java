@@ -21,4 +21,9 @@ public class UserServiceImpl implements UserService {
         user.setRole(User.USER_STUDENT_ROLE);
         return this.userRepository.save(user);
     }
+
+    @Override
+    public User login(User user) {
+        return null;
+    }
 }

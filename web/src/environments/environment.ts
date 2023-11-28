@@ -8,7 +8,10 @@ export const environment = {
   title: '计算机专业课程在线考试管理系统',
   style: 'record',
   apiUrl: 'api',
-  size: 10
+  size: 10,
+  ADMIN_ROLE: 0,
+  TEACHER_ROLE: 1,
+  STUDENT_ROLE: 2
 };
 
 /*
