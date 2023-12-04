@@ -4,9 +4,9 @@
   </a>
   <div class="collapse navbar-collapse">
     <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-      <li class="nav-item active">
+      <li class="nav-item active" *ngIf="username === '管理员'">
         <a class="nav-link small" routerLink="systemConfig">
-          <span class="font-weight-light">系统设置  </span>
+          <span class="font-weight-light">系统设置</span>
         </a>
       </li>
       <li class="nav-item active">
