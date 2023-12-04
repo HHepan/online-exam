@@ -34,7 +34,7 @@ const routes: Routes = [
     path: 'set-questions',
     component: SetQuestionComponent,
     data: {
-      title: '设置题目'
+      title: '查看题目'
     },
   }
 ];
