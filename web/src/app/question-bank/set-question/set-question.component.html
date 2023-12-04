@@ -1,0 +1,87 @@
+<div class="container">
+  <div style="background-color: #f9f8f4">
+    <form [formGroup]="formGroup">
+      <div class="form-group row">
+        <label class="col-1 text-left col-form-label ml-3"><code>*</code>类型</label>
+        <div class="col-4 mt-2 text-left ml-5">
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" formControlName="quesType" value="true" id="questionType0">
+            <label class="form-check-label" for="questionType0">选择</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" formControlName="quesType" value="false" id="questionType1">
+            <label class="form-check-label" for="questionType1">填空</label>
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-1 text-left col-form-label ml-3"><code>*</code>题干</label>
+        <div class="col-4 mt-2 text-left ml-5">
+          <textarea class="form-control" formControlName="quesStem" style="height: 100px; width: 700px"></textarea>
+        </div>
+      </div>
+      <div>
+        <div class="form-group row">
+          <label class="col-1 text-left col-form-label ml-3"><code>*</code>选项</label>
+          <div class="col-6 mt-2 text-left ml-5">
+            <label style="font-size: larger">A</label>
+            <input class="form-control" style="width: 515px; float: right">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-1 text-left col-form-label ml-3">&nbsp;</label>
+          <div class="col-6 mt-2 text-left ml-5">
+            <label style="font-size: larger">B</label>
+            <input class="form-control" style="width: 515px; float: right">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-1 text-left col-form-label ml-3">&nbsp;</label>
+          <div class="col-6 mt-2 text-left ml-5">
+            <label style="font-size: larger">C</label>
+            <input class="form-control" style="width: 515px; float: right">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-1 text-left col-form-label ml-3">&nbsp;</label>
+          <div class="col-6 mt-2 text-left ml-5">
+            <label style="font-size: larger">D</label>
+            <input class="form-control" style="width: 515px; float: right">
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-1 text-left col-form-label ml-3"><code>*</code>答案</label>
+        <div class="col-4 mt-2 text-left ml-5">
+          <textarea class="form-control" formControlName="answer" style="height: 100px; width: 700px"></textarea>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-1 text-left col-form-label ml-3"><code>*</code>答案</label>
+        <div class="col-6 mt-2 text-left ml-5">
+          <div class="form-check form-check-inline">
+            <label class="form-check-label mr-2" for="A">A</label>
+            <input class="form-check-input mr-5" type="radio" value="true" id="A">
+          </div>
+          <div class="form-check form-check-inline">
+            <label class="form-check-label mr-2" for="B">B</label>
+            <input class="form-check-input mr-5" type="radio" value="false" id="B">
+          </div>
+          <div class="form-check form-check-inline">
+            <label class="form-check-label mr-2" for="C">C</label>
+            <input class="form-check-input mr-5" type="radio" value="false" id="C">
+          </div>
+          <div class="form-check form-check-inline">
+            <label class="form-check-label mr-2" for="D">D</label>
+            <input class="form-check-input mr-5" type="radio" value="false" id="D">
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="form-group">
+    <div class="col-12 text-right mt-4">
+      <button type="submit" class="btn btn-primary"><i class="bi bi-check-lg"></i>新增题目</button>
+    </div>
+  </div>
+</div>

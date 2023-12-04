@@ -7,6 +7,9 @@ import { QuestionBankEditComponent } from './question-bank-edit/question-bank-ed
 import {CourseModule} from "../course/course.module";
 import {ClazzModule} from "../clazz/clazz.module";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {SizeModule} from "../common/size/size.module";
+import {PageModule} from "../common/page/page.module";
+import { SetQuestionComponent } from './set-question/set-question.component';
 
 
 
@@ -14,7 +17,8 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
   declarations: [
     QuestionBankComponent,
     QuestionBankAddComponent,
-    QuestionBankEditComponent
+    QuestionBankEditComponent,
+    SetQuestionComponent
   ],
   imports: [
     CommonModule,
@@ -22,7 +26,9 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
     CourseModule,
     ClazzModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SizeModule,
+    PageModule
   ]
 })
 export class QuestionBankModule { }

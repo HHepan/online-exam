@@ -32,6 +32,9 @@ export class CourseAddComponent {
       this.commonService.success(() => {
         this.onClose();
       }, '新增成功');
+    }, error => {
+      this.commonService.error(() => {
+      }, '新增失败');
     });
   }
 }

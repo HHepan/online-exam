@@ -28,6 +28,7 @@ public class CourseController {
      * @return 分页课程
      */
     @GetMapping("page")
+    @JsonView(PageJsonView.class)
     public Page<Course> page(
             @RequestParam(required = false, defaultValue = "") String name,
             @SortDefault.SortDefaults(@SortDefault(sort = "id", direction = Sort.Direction.DESC))
@@ -52,7 +53,13 @@ public class CourseController {
     }
 
     @GetMapping("getAll")
+    @JsonView(PageJsonView.class)
     public Iterable<Course> getAll() {
         return this.courseService.getAll();
     }
+
+    private interface PageJsonView extends
+            Course.IdJsonView,
+            Course.NameJsonView
+    {}
 }

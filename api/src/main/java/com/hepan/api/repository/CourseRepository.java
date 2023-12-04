@@ -12,7 +12,7 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 public interface CourseRepository extends PagingAndSortingRepository<Course, Long>, CrudRepository<Course, Long>, JpaSpecificationExecutor<Course> {
     Iterable<Course> findAll();
 
-    default Page<Course> findAllByNameAndPhone(String name, Pageable pageable) {
+    default Page<Course> findAllByName(String name, Pageable pageable) {
         Specification<Course> specification = CourseSpecs.containingName(name);
 
         return this.findAll(specification, pageable);

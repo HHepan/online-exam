@@ -5,8 +5,6 @@ import {HttpClient, HttpParams} from "@angular/common/http";
 import {Observable, tap} from "rxjs";
 import {Page} from "../app/common/page";
 import {Action, Store} from "@tethys/store";
-import {ClazzService} from "./clazz.service";
-import {Clazz} from "../entity/clazz";
 
 
 /**
@@ -21,7 +19,7 @@ interface StudentStatus extends Store<Student> {
 @Injectable({
   providedIn: 'root'
 })
-export class StudentService extends Store<StudentStatus>  {
+export class StudentService extends Store<StudentStatus> {
   url=`${environment.apiUrl}/student`;
 
   constructor(private httpClient: HttpClient) {
