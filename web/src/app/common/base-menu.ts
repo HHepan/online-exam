@@ -10,4 +10,7 @@ export class BaseMenu {
 
   /** 图标 */
   icon: string | undefined;
+
+  /** 权限 */
+  role: string | undefined;
 }

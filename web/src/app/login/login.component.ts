@@ -42,10 +42,14 @@ export class LoginComponent implements OnInit {
     }
     const user = this.formGroup.value as User;
 
-    console.log('onLogin user', user);
     this.userService.login(user).subscribe(currentLoginUser => {
-      console.log('onLogin currentLoginUser', currentLoginUser);
-      this.router.navigateByUrl('dashboard').then();
+      if (currentLoginUser !== null) {
+        window.sessionStorage.setItem('login', 'true');
+        window.sessionStorage.setItem('currentLoginUserId', currentLoginUser.id.toString());
+        this.router.navigateByUrl('dashboard').then();
+      } else {
+        this.errorInfo = '用户名或密码错误，请再次输入';
+      }
     });
   }
 }

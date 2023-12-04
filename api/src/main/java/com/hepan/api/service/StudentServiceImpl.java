@@ -12,10 +12,13 @@ import org.springframework.stereotype.Service;
 @Service
 public class StudentServiceImpl implements StudentService {
     private StudentRepository studentRepository;
+    private UserRepository userRepository;
     private UserService userService;
     StudentServiceImpl(StudentRepository studentRepository,
+                       UserRepository userRepository,
                        UserService userService) {
         this.studentRepository = studentRepository;
+        this.userRepository = userRepository;
         this.userService = userService;
     }
 
@@ -38,6 +41,9 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public void deleteById(Long id) {
+        Student student = this.getById(id);
+        User user = student.getUser();
         this.studentRepository.deleteById(id);
+        this.userRepository.delete(user);
     }
 }

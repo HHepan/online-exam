@@ -3,6 +3,8 @@ import {BaseMenu} from '../../common/base-menu';
 import { menus } from '../../common/menu.config';
 import {environment} from '../../../environments/environment';
 import {Router} from '@angular/router';
+import {UserService} from "../../../service/user.service";
+import {User} from "../../../entity/user";
 
 @Component({
   selector: 'app-menu',
@@ -11,14 +13,21 @@ import {Router} from '@angular/router';
 })
 export class MenuComponent implements OnInit {
   menus = new Array<BaseMenu>();
-  mouseoverMenus: string | undefined = '未检测到鼠标悬停'
+  mouseoverMenus: string | undefined = '未检测到鼠标悬停';
+  currentLoginUser: User | undefined;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router,
+              private userService: UserService) { }
 
   ngOnInit(): void {
-    menus.forEach(menu => {
+    this.userService.getCurrentLoginUser().subscribe(user => {
+      this.currentLoginUser = user;
+      menus.forEach(menu => {
+        if (this.currentLoginUser && menu.role?.includes(this.currentLoginUser?.role?.toString())) {
           this.menus.push(menu);
+        }
       });
+    });
   }
 
   getBackgroundColor(menu: BaseMenu): string | undefined {
