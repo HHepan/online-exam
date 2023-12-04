@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
 import {CommonService} from "../../../service/common.service";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {Clazz} from "../../../entity/clazz";
+import {QuestionBank} from "../../../entity/questionBank";
+import {QuestionBankService} from "../../../service/question-bank.service";
 
 @Component({
   selector: 'app-question-bank-add',
@@ -7,7 +11,12 @@ import {CommonService} from "../../../service/common.service";
   styleUrls: ['./question-bank-add.component.css']
 })
 export class QuestionBankAddComponent {
-  constructor(private commonService: CommonService) {
+  formGroup = new FormGroup({
+    name: new FormControl('', [Validators.required]),
+    courseId: new FormControl('', [Validators.required])
+  });
+  constructor(private commonService: CommonService,
+              private questionBankService: QuestionBankService) {
   }
 
   /**
@@ -15,5 +24,15 @@ export class QuestionBankAddComponent {
    */
   onClose() {
     this.commonService.back();
+  }
+
+  onSubmit() {
+    console.log('QuestionBankAddComponent', this.formGroup.value);
+    const questionBank = this.formGroup.value as QuestionBank;
+    // this.questionBankService.save(questionBank).subscribe(res => {
+    //   this.commonService.success(() => {
+    //     this.onClose();
+    //   }, '新增成功');
+    // });
   }
 }

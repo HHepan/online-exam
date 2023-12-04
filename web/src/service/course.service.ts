@@ -72,4 +72,8 @@ export class CourseService extends Store<CourseStatus> {
       this.page(state.httpParams);
     }));
   }
+
+  getAll(): Observable<Course[]> {
+    return this.httpClient.get<Course[]>(`${this.url}/getAll`);
+  }
 }

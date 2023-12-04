@@ -33,7 +33,6 @@ export class StudentAddComponent {
   }
 
   onSubmit() {
-    console.log(this.formGroup.value);
     const student = {
       name: this.formGroup.get(this.keys.name)?.value,
       sno: this.formGroup.get(this.keys.sno)?.value,

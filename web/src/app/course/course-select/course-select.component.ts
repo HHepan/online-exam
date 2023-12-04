@@ -1,26 +1,27 @@
-import {Component, forwardRef, Input, OnInit} from '@angular/core';
-import {ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR} from "@angular/forms";
-import {Clazz} from "../../../entity/clazz";
+import {Component, forwardRef, Input} from '@angular/core';
+import {FormControl, NG_VALUE_ACCESSOR} from "@angular/forms";
+import {Course} from "../../../entity/course";
 import {ClazzService} from "../../../service/clazz.service";
+import {CourseService} from "../../../service/course.service";
 
 @Component({
-  selector: 'app-clazz-select',
-  templateUrl: './clazz-select.component.html',
-  styleUrls: ['./clazz-select.component.css'],
+  selector: 'app-course-select',
+  templateUrl: './course-select.component.html',
+  styleUrls: ['./course-select.component.css'],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
       multi: true,
-      useExisting: forwardRef(() => ClazzSelectComponent)
+      useExisting: forwardRef(() => CourseSelectComponent)
     }
   ]
 })
-export class ClazzSelectComponent implements OnInit, ControlValueAccessor  {
+export class CourseSelectComponent {
   /**
-   * 所有班级
+   * 所有课程
    */
-  allClazz = new Array<Clazz>();
-  clazzSelected = new FormControl(null);
+  allCourse = new Array<Course>();
+  courseSelected = new FormControl(null);
 
   /**
    * 是否显示 请选择
@@ -28,16 +29,16 @@ export class ClazzSelectComponent implements OnInit, ControlValueAccessor  {
   isShowPleaseSelect = true;
 
   @Input()
-  set showAllClazz(isShowAllClazz: boolean) {
-    this.isShowPleaseSelect = isShowAllClazz;
+  set showAllCourse(isShowAllCourse: boolean) {
+    this.isShowPleaseSelect = isShowAllCourse;
   }
 
-  constructor(private clazzService: ClazzService) {
+  constructor(private courseService: CourseService) {
   }
 
   ngOnInit(): void {
-    this.clazzService.getAll().subscribe(allClazz => {
-      this.allClazz = allClazz;
+    this.courseService.getAll().subscribe(allCourse => {
+      this.allCourse = allCourse;
     });
   }
 
@@ -47,7 +48,7 @@ export class ClazzSelectComponent implements OnInit, ControlValueAccessor  {
    * @param fn 此类型取决于当前组件的弹出值类型，当前弹出为clazzId number
    */
   registerOnChange(fn: any): void {
-    this.clazzSelected.valueChanges.subscribe(data => {
+    this.courseSelected.valueChanges.subscribe(data => {
       fn(data);
     });
   }
@@ -64,6 +65,6 @@ export class ClazzSelectComponent implements OnInit, ControlValueAccessor  {
    * @param obj 此类型取决于当前组件的接收类型，当前接收为clazzId number
    */
   writeValue(obj: any): void {
-    this.clazzSelected.setValue(obj);
+    this.courseSelected.setValue(obj);
   }
 }

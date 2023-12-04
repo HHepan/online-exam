@@ -10,4 +10,6 @@ public interface CourseService {
     Course save(Course course);
 
     void deleteById(Long id);
+
+    Iterable<Course> getAll();
 }

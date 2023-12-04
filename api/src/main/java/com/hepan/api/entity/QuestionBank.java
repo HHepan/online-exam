@@ -3,15 +3,15 @@ package com.hepan.api.entity;
 import jakarta.persistence.*;
 
 @Entity
-public class Course {
+public class QuestionBank {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
 
-    @OneToOne( mappedBy = "course" )
-    private QuestionBank questionBank;
+    @OneToOne()
+    private Course course;
 
     public Long getId() { return id; }
 

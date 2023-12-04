@@ -24,11 +24,11 @@ public class User {
     @JsonView(RoleJsonView.class)
     private Long role;
 
-    @OneToOne( mappedBy = "user")
+    @OneToOne( mappedBy = "user" )
     @JsonView(StudentJsonView.class)
     private Student student;
 
-    @OneToOne( mappedBy = "user")
+    @OneToOne( mappedBy = "user" )
     @JsonView(TeacherJsonView.class)
     private Teacher teacher;
 
