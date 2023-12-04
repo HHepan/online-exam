@@ -2,7 +2,7 @@
   <div class="form-group">
     <div class="row">
       <div class="col-6 text-left mt-4">
-        <h5>题目总数：{{ currentQuestionBank?.questions?.length }}</h5>
+        <h5>{{ currentQuestionBank?.name }}-题目总数：{{ currentQuestionBank?.questions?.length }}</h5>
       </div>
       <div class="col-6 text-right mt-4">
         <button *ngIf="!isAdd" type="submit" class="btn btn-primary" (click)="onAddQuestion()"><i class="bi bi-check-lg"></i>新增题目</button>

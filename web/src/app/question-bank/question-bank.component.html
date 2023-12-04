@@ -30,7 +30,7 @@
     </thead>
     <tbody>
     <tr *ngFor="let questionBank of pageData.content, index as i">
-      <td>{{ i }}</td>
+      <td>{{ i + 1 }}</td>
       <td>{{ questionBank.name }}</td>
       <td>{{ questionBank.course.name }}</td>
       <td>
