@@ -34,7 +34,7 @@
       <td>{{ questionBank.name }}</td>
       <td>{{ questionBank.course.name }}</td>
       <td>
-        <a class="btn btn-sm btn-info mr-2" routerLink="set-questions">查看题目</a>
+        <a class="btn btn-sm btn-info mr-2" [routerLink]="'set-questions/' + questionBank.id">查看题目</a>
         <a class="btn btn-sm btn-primary mr-2" routerLink="edit/1">编辑</a>
         <a class="btn btn-sm btn-danger" (click)="onDelete(questionBank)">删除</a>
       </td>

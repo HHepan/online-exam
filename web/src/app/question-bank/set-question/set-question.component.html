@@ -1,16 +1,30 @@
 <div class="container">
+  <div class="form-group">
+    <div class="row">
+      <div class="col-6 text-left mt-4">
+        <h5>题目总数：{{ currentQuestionBank?.questions?.length }}</h5>
+      </div>
+      <div class="col-6 text-right mt-4">
+        <button *ngIf="!isAdd" type="submit" class="btn btn-primary" (click)="onAddQuestion()"><i class="bi bi-check-lg"></i>新增题目</button>
+        <ng-container *ngIf="isAdd">
+          <button type="button" class="btn btn-secondary mr-1" (click)="onCancelAdd()"><i class="bi bi-x"></i>取消</button>
+          <button type="submit" class="btn btn-primary" (click)="onSaveQuestion()"><i class="bi bi-check-lg"></i>保存</button>
+        </ng-container>
+      </div>
+    </div>
+  </div>
   <div style="background-color: #f9f8f4">
-    <form [formGroup]="formGroup">
+    <form *ngIf="isAdd" [formGroup]="formGroup">
       <div class="form-group row">
         <label class="col-1 text-left col-form-label ml-3"><code>*</code>类型</label>
         <div class="col-4 mt-2 text-left ml-5">
           <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" formControlName="quesType" value="true" id="questionType0">
+            <input (click)="changeQuesType()" class="form-check-input" type="radio" formControlName="quesType" value="choice" id="questionType0">
             <label class="form-check-label" for="questionType0">选择</label>
           </div>
           <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" formControlName="quesType" value="false" id="questionType1">
-            <label class="form-check-label" for="questionType1">填空</label>
+            <input (click)="changeQuesType()" class="form-check-input" type="radio" formControlName="quesType" value="blank" id="questionType1">
+            <label class="form-check-label" for="questionType1">填空/简答</label>
           </div>
         </div>
       </div>
@@ -20,68 +34,92 @@
           <textarea class="form-control" formControlName="quesStem" style="height: 100px; width: 700px"></textarea>
         </div>
       </div>
-      <div>
-        <div class="form-group row">
-          <label class="col-1 text-left col-form-label ml-3"><code>*</code>选项</label>
-          <div class="col-6 mt-2 text-left ml-5">
-            <label style="font-size: larger">A</label>
-            <input class="form-control" style="width: 515px; float: right">
+      <ng-container *ngIf="formGroup.get(keys.quesType)?.value === 'choice'">
+        <div>
+          <div class="form-group row">
+            <label class="col-1 text-left col-form-label ml-3"><code>*</code>选项</label>
+            <div class="col-6 mt-2 text-left ml-5">
+              <label style="font-size: larger">A</label>
+              <input class="form-control" formControlName="A" style="width: 515px; float: right">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-1 text-left col-form-label ml-3">&nbsp;</label>
+            <div class="col-6 mt-2 text-left ml-5">
+              <label style="font-size: larger">B</label>
+              <input class="form-control" formControlName="B" style="width: 515px; float: right">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-1 text-left col-form-label ml-3">&nbsp;</label>
+            <div class="col-6 mt-2 text-left ml-5">
+              <label style="font-size: larger">C</label>
+              <input class="form-control" formControlName="C" style="width: 515px; float: right">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-1 text-left col-form-label ml-3">&nbsp;</label>
+            <div class="col-6 mt-2 text-left ml-5">
+              <label style="font-size: larger">D</label>
+              <input class="form-control" formControlName="D" style="width: 515px; float: right">
+            </div>
           </div>
         </div>
         <div class="form-group row">
-          <label class="col-1 text-left col-form-label ml-3">&nbsp;</label>
+          <label class="col-1 text-left col-form-label ml-3"><code>*</code>答案</label>
           <div class="col-6 mt-2 text-left ml-5">
-            <label style="font-size: larger">B</label>
-            <input class="form-control" style="width: 515px; float: right">
+            <div class="form-check form-check-inline">
+              <label style="font-size: larger" class="form-check-label mr-2" for="A">A</label>
+              <input class="form-check-input mr-5" formControlName="answer" type="radio" value="A" id="A">
+            </div>
+            <div class="form-check form-check-inline">
+              <label style="font-size: larger" class="form-check-label mr-2" for="B">B</label>
+              <input class="form-check-input mr-5" formControlName="answer" type="radio" value="B" id="B">
+            </div>
+            <div class="form-check form-check-inline">
+              <label style="font-size: larger" class="form-check-label mr-2" for="C">C</label>
+              <input class="form-check-input mr-5" formControlName="answer" type="radio" value="C" id="C">
+            </div>
+            <div class="form-check form-check-inline">
+              <label style="font-size: larger" class="form-check-label mr-2" for="D">D</label>
+              <input class="form-check-input mr-5" formControlName="answer" type="radio" value="D" id="D">
+            </div>
           </div>
         </div>
+      </ng-container>
+      <ng-container *ngIf="formGroup.get(keys.quesType)?.value === 'blank'">
         <div class="form-group row">
-          <label class="col-1 text-left col-form-label ml-3">&nbsp;</label>
-          <div class="col-6 mt-2 text-left ml-5">
-            <label style="font-size: larger">C</label>
-            <input class="form-control" style="width: 515px; float: right">
+          <label class="col-1 text-left col-form-label ml-3"><code>*</code>答案</label>
+          <div class="col-4 mt-2 text-left ml-5">
+            <textarea class="form-control" formControlName="answer" style="height: 100px; width: 700px"></textarea>
           </div>
         </div>
-        <div class="form-group row">
-          <label class="col-1 text-left col-form-label ml-3">&nbsp;</label>
-          <div class="col-6 mt-2 text-left ml-5">
-            <label style="font-size: larger">D</label>
-            <input class="form-control" style="width: 515px; float: right">
-          </div>
-        </div>
-      </div>
-      <div class="form-group row">
-        <label class="col-1 text-left col-form-label ml-3"><code>*</code>答案</label>
-        <div class="col-4 mt-2 text-left ml-5">
-          <textarea class="form-control" formControlName="answer" style="height: 100px; width: 700px"></textarea>
-        </div>
-      </div>
-      <div class="form-group row">
-        <label class="col-1 text-left col-form-label ml-3"><code>*</code>答案</label>
-        <div class="col-6 mt-2 text-left ml-5">
-          <div class="form-check form-check-inline">
-            <label style="font-size: larger" class="form-check-label mr-2" for="A">A</label>
-            <input class="form-check-input mr-5" type="radio" value="true" id="A">
-          </div>
-          <div class="form-check form-check-inline">
-            <label style="font-size: larger" class="form-check-label mr-2" for="B">B</label>
-            <input class="form-check-input mr-5" type="radio" value="false" id="B">
-          </div>
-          <div class="form-check form-check-inline">
-            <label style="font-size: larger" class="form-check-label mr-2" for="C">C</label>
-            <input class="form-check-input mr-5" type="radio" value="false" id="C">
-          </div>
-          <div class="form-check form-check-inline">
-            <label style="font-size: larger" class="form-check-label mr-2" for="D">D</label>
-            <input class="form-check-input mr-5" type="radio" value="false" id="D">
-          </div>
-        </div>
-      </div>
+      </ng-container>
+      <hr/>
     </form>
-  </div>
-  <div class="form-group">
-    <div class="col-12 text-right mt-4">
-      <button type="submit" class="btn btn-primary"><i class="bi bi-check-lg"></i>新增题目</button>
-    </div>
+    <ng-container *ngFor="let question of currentQuestionBank?.questions; index as i">
+      <div class="form-group row text-left col-form-label ml-1">
+        <div class="col-12">
+          {{ i + 1 }}.{{ question.stem }}
+          <a href="javascript:void(0);" class="ml-5" *ngIf="!isShowQuestionDetail(question.id)" (click)="viewDetail(question.id)">详情</a>
+          <ng-container *ngIf="isShowQuestionDetail(question.id)">
+            <a href="javascript:void(0);" class="ml-5" style="color: grey" (click)="cancelViewDetail(question.id)">取消</a>
+            <a href="javascript:void(0);" class="ml-2">编辑</a>
+            <a href="javascript:void(0);" class="ml-2" style="color: red" (click)="onDelete(question)">删除</a>
+          </ng-container>
+        </div>
+      </div>
+      <ng-container *ngIf="isShowQuestionDetail(question.id)">
+        <div class="form-group row text-left col-form-label ml-5" *ngFor="let option of getOptionsArr(question.options)">
+          {{ option }}
+        </div>
+        <div class="form-group row text-left col-form-label ml-1">
+          <div class="col-12">
+            答案：{{ getAnswer(question.options, question.answer) }}
+          </div>
+        </div>
+      </ng-container>
+      <hr/>
+    </ng-container>
   </div>
 </div>

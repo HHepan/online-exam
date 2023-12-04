@@ -33,6 +33,10 @@ export class QuestionBankService extends Store<QuestionBankStatus>  {
     return status.pageData;
   }
 
+  static getById(status: QuestionBankStatus): QuestionBank {
+    return status.getById;
+  }
+
   @Action()
   page(param: { page: number; size: number; name?: string;}): Observable<Page<QuestionBank>>  {
     let httpParams = new HttpParams()
@@ -72,5 +76,15 @@ export class QuestionBankService extends Store<QuestionBankStatus>  {
       this.next(state);
       this.page(state.httpParams);
     }));
+  }
+
+  @Action()
+  getById(questionBankId: number): Observable<QuestionBank>  {
+    return this.httpClient.get<QuestionBank>(`${this.url}/${questionBankId}`).pipe(tap(data => {
+      const state = this.getState();
+      state.getById = data as QuestionBank;
+      this.next(state);
+    }));
+
   }
 }
