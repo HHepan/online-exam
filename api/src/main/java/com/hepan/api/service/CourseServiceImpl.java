@@ -27,4 +27,9 @@ public class CourseServiceImpl implements CourseService {
     public void deleteById(Long id) {
         this.courseRepository.deleteById(id);
     }
+
+    @Override
+    public Iterable<Course> getAll() {
+        return this.courseRepository.findAll();
+    }
 }

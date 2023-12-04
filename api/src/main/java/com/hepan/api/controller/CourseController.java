@@ -1,5 +1,7 @@
 package com.hepan.api.controller;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import com.hepan.api.entity.Clazz;
 import com.hepan.api.entity.Course;
 import com.hepan.api.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,5 +49,10 @@ public class CourseController {
     @DeleteMapping("{id}")
     void delete(@PathVariable Long id) {
         this.courseService.deleteById(id);
+    }
+
+    @GetMapping("getAll")
+    public Iterable<Course> getAll() {
+        return this.courseService.getAll();
     }
 }

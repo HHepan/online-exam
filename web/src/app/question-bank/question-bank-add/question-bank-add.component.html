@@ -4,11 +4,17 @@
   </ol>
 </nav>
 
-<form>
+<form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
   <div class="form-group row text-right">
     <label class="col-4 col-form-label"><code>*</code>名称</label>
     <div class="col-4">
-      <input type="text" class="form-control">
+      <input type="text" class="form-control" formControlName="name">
+    </div>
+  </div>
+  <div class="form-group row text-right">
+    <label class="col-4 col-form-label"><code>*</code>课程</label>
+    <div class="col-8">
+      <app-course-select formControlName="courseId"></app-course-select>
     </div>
   </div>
   <hr/>
