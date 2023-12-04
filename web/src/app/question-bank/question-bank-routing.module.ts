@@ -4,6 +4,7 @@ import {QuestionBankComponent} from "./question-bank.component";
 import {DialogEntryComponent} from "../common/dialog-entry/dialog-entry.component";
 import {QuestionBankAddComponent} from "./question-bank-add/question-bank-add.component";
 import {QuestionBankEditComponent} from "./question-bank-edit/question-bank-edit.component";
+import {SetQuestionComponent} from "./set-question/set-question.component";
 
 const routes: Routes = [
   {
@@ -29,6 +30,13 @@ const routes: Routes = [
       }
     ]
   },
+  {
+    path: 'set-questions',
+    component: SetQuestionComponent,
+    data: {
+      title: '设置题目'
+    },
+  }
 ];
 
 @NgModule({

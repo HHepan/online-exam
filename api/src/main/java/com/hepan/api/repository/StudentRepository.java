@@ -14,7 +14,7 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 public interface StudentRepository  extends PagingAndSortingRepository<Student, Long>, CrudRepository<Student, Long>, JpaSpecificationExecutor<Student> {
     Iterable<Student> findAll();
 
-    default Page<Student> findAllByNameAndPhone(String name, String sno, Pageable pageable) {
+    default Page<Student> findAllByNameAndSno(String name, String sno, Pageable pageable) {
         Specification<Student> specification = StudentSpecs.containingName(name)
                 .and(StudentSpecs.containingSno(sno));
 

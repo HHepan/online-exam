@@ -31,7 +31,7 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public Page<Student> page(String name, String sno, Pageable pageable) {
-        return this.studentRepository.findAllByNameAndPhone(name, sno, pageable);
+        return this.studentRepository.findAllByNameAndSno(name, sno, pageable);
     }
 
     @Override

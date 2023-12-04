@@ -17,7 +17,7 @@ public class ClazzServiceImpl implements ClazzService {
 
     @Override
     public Page<Clazz> page(String name, Pageable pageable) {
-        return this.clazzRepository.findAllByNameAndPhone(name, pageable);
+        return this.clazzRepository.findAllByName(name, pageable);
     }
 
     @Override

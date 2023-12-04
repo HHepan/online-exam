@@ -15,7 +15,7 @@ public class CourseServiceImpl implements CourseService {
 
     @Override
     public Page<Course> page(String name, Pageable pageable) {
-        return this.courseRepository.findAllByNameAndPhone(name, pageable);
+        return this.courseRepository.findAllByName(name, pageable);
     }
 
     @Override

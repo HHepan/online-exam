@@ -12,7 +12,7 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 public interface ClazzRepository extends PagingAndSortingRepository<Clazz, Long>, CrudRepository<Clazz, Long>, JpaSpecificationExecutor<Clazz> {
     Iterable<Clazz> findAll();
 
-    default Page<Clazz> findAllByNameAndPhone(String name, Pageable pageable) {
+    default Page<Clazz> findAllByName(String name, Pageable pageable) {
         Specification<Clazz> specification = ClazzSpecs.containingName(name);
 
         return this.findAll(specification, pageable);
