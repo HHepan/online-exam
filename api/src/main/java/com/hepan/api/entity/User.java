@@ -29,6 +29,7 @@ public class User {
     private Student student;
 
     @OneToOne( mappedBy = "user")
+    @JsonView(TeacherJsonView.class)
     private Teacher teacher;
 
     public Long getId() { return id; }
@@ -59,5 +60,13 @@ public class User {
     public interface UsernameJsonView {}
     public interface PasswordJsonView {}
     public interface RoleJsonView {}
-    public interface StudentJsonView {}
+    public interface StudentJsonView extends
+            Student.NameJsonView,
+            Student.SnoJsonView,
+            Student.ClazzJsonView
+    {}
+    public interface TeacherJsonView extends
+            Teacher.NameJsonView,
+            Teacher.PhoneJsonView
+    {}
 }

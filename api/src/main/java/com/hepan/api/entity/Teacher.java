@@ -1,17 +1,22 @@
 package com.hepan.api.entity;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import jakarta.persistence.*;
 
 @Entity
 public class Teacher {
     @Id
+    @JsonView(IdJsonView.class)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @JsonView(NameJsonView.class)
     private String name;
 
+    @JsonView(PhoneJsonView.class)
     private String phone;
 
+    @JsonView(UserJsonView.class)
     @OneToOne()
     private User user;
 
@@ -35,4 +40,14 @@ public class Teacher {
     public void setUser(User user) {
         this.user = user;
     }
+
+    public interface IdJsonView {}
+    public interface NameJsonView {}
+    public interface PhoneJsonView {}
+    public interface UserJsonView extends
+            User.IdJsonView,
+            User.UsernameJsonView,
+            User.PasswordJsonView,
+            User.RoleJsonView
+    {}
 }

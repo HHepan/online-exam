@@ -1,5 +1,7 @@
 package com.hepan.api.controller;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import com.hepan.api.entity.Student;
 import com.hepan.api.entity.Teacher;
 import com.hepan.api.service.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +28,7 @@ public class TeacherController {
      * @return 分页教师
      */
     @GetMapping("page")
+    @JsonView(PageJsonView.class)
     public Page<Teacher> page(
             @RequestParam(required = false, defaultValue = "") String name,
             @RequestParam(required = false, defaultValue = "") String phone,
@@ -49,4 +52,11 @@ public class TeacherController {
     void delete(@PathVariable Long id) {
         this.teacherService.deleteById(id);
     }
+
+    private interface PageJsonView extends
+            Teacher.IdJsonView,
+            Teacher.NameJsonView,
+            Teacher.PhoneJsonView,
+            Teacher.UserJsonView
+    {}
 }
