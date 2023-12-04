@@ -31,7 +31,7 @@ const routes: Routes = [
     ]
   },
   {
-    path: 'set-questions',
+    path: 'set-questions/:id',
     component: SetQuestionComponent,
     data: {
       title: '查看题目'

@@ -36,7 +36,6 @@ export class UserService {
    */
   getCurrentLoginUser(): Observable<User> {
     let currentLoginUserId = window.sessionStorage.getItem('currentLoginUserId');
-    console.log('currentLoginUser', currentLoginUserId);
     if (currentLoginUserId === null) {
       currentLoginUserId = '';
     }

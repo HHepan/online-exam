@@ -10,4 +10,6 @@ public interface QuestionBankService {
     Page<QuestionBank> page(String name, Pageable pageable);
 
     void deleteById(Long id);
+
+    QuestionBank getById(Long id);
 }

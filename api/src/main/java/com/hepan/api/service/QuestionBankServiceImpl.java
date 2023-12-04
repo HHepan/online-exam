@@ -27,4 +27,9 @@ public class QuestionBankServiceImpl implements QuestionBankService {
     public void deleteById(Long id) {
         this.questionBankRepository.deleteById(id);
     }
+
+    @Override
+    public QuestionBank getById(Long id) {
+        return this.questionBankRepository.findById(id).get();
+    }
 }

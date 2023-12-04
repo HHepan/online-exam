@@ -49,6 +49,13 @@ public class QuestionBankController {
         return this.questionBankService.save(questionBank);
     }
 
+    @GetMapping("{id}")
+    @JsonView(GetByIdJsonView.class)
+    QuestionBank getById(@PathVariable Long id) {
+        return this.questionBankService.getById(id);
+    }
+
+
     @DeleteMapping("{id}")
     void delete(@PathVariable Long id) {
         this.questionBankService.deleteById(id);
@@ -58,5 +65,12 @@ public class QuestionBankController {
             QuestionBank.IdJsonView,
             QuestionBank.NameJsonView,
             QuestionBank.CourseJsonView
+    {}
+
+    private interface GetByIdJsonView extends
+            QuestionBank.IdJsonView,
+            QuestionBank.NameJsonView,
+            QuestionBank.CourseJsonView,
+            QuestionBank.QuestionsJsonView
     {}
 }
