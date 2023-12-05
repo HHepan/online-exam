@@ -229,4 +229,13 @@ export class CommonService {
     });
   }
 
+  /**
+   * 将时间字符串转换为时间戳
+   * @param dateString    时间字符串转换 如：2023-12-05T23:00
+   * @return timestamp       时间戳
+   */
+  getTimeStampFromDateString(dateString: string): number {
+    const timestamp = new Date(dateString).getTime();
+    return timestamp;
+  }
 }

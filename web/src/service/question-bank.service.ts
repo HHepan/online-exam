@@ -3,7 +3,6 @@ import {QuestionBank} from "../entity/questionBank";
 import {Action, Store} from "@tethys/store";
 import {Page} from "../app/common/page";
 import {environment} from "../environments/environment";
-import {Student} from "../entity/student";
 import {Observable, tap} from "rxjs";
 import {HttpClient, HttpParams} from "@angular/common/http";
 

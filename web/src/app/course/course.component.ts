@@ -12,7 +12,7 @@ import {CourseService} from "../../service/course.service";
   templateUrl: './course.component.html',
   styleUrls: ['./course.component.css']
 })
-export class CourseComponent implements OnInit{
+export class CourseComponent implements OnInit {
   queryForm = new FormGroup({
     name: new FormControl()
   });
@@ -29,7 +29,6 @@ export class CourseComponent implements OnInit{
     page: 0,
     size: environment.size,
     name: '',
-    phone: '',
   };
 
 
