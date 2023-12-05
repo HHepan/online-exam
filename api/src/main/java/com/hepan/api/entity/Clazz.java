@@ -20,6 +20,10 @@ public class Clazz {
     @JsonView(StudentsJsonView.class)
     private List<Student> students = new ArrayList<>();
 
+    @ManyToMany()
+    @JsonView(ExamsJsonView.class)
+    private List<Exam> exams = new ArrayList<>();
+
     public Long getId() { return id; }
 
     public void setId(Long id) { this.id = id; }
@@ -39,4 +43,8 @@ public class Clazz {
     public interface IdJsonView {}
     public interface NameJsonView {}
     public interface StudentsJsonView {}
+    public interface ExamsJsonView extends
+            Exam.IdJsonView,
+            Exam.NameJsonView
+    {}
 }

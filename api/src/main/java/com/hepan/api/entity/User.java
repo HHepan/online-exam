@@ -3,6 +3,9 @@ package com.hepan.api.entity;
 import com.fasterxml.jackson.annotation.JsonView;
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 public class User {
     public static String DEFAULT_PASSWORD = "hebut.edu";
@@ -32,6 +35,10 @@ public class User {
     @JsonView(TeacherJsonView.class)
     private Teacher teacher;
 
+    @OneToMany(mappedBy = "user")
+    @JsonView(ExamJsonView.class)
+    private List<Exam> exams = new ArrayList<>();
+
     public Long getId() { return id; }
 
     public void setId(Long id) { this.id = id; }
@@ -56,6 +63,10 @@ public class User {
 
     public void setTeacher(Teacher teacher) { this.teacher = teacher; }
 
+    public List<Exam> getExam() { return exams; }
+
+    public void setExam(List<Exam> exams) { this.exams = exams; }
+
     public interface IdJsonView {}
     public interface UsernameJsonView {}
     public interface PasswordJsonView {}
@@ -68,5 +79,10 @@ public class User {
     public interface TeacherJsonView extends
             Teacher.NameJsonView,
             Teacher.PhoneJsonView
+    {}
+
+    public interface ExamJsonView extends
+            Exam.IdJsonView,
+            Exam.NameJsonView
     {}
 }
