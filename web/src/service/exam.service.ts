@@ -15,6 +15,7 @@ import {Question} from "../entity/question";
  * */
 interface ExamStatus extends Store<ExamService> {
   pageData: Page<Exam>;
+  pageDataForMyExam: Page<Exam>;
   httpParams: { size: number; page: number; name?: string;};
   getById: Exam;
 }
@@ -27,12 +28,17 @@ export class ExamService extends Store<ExamStatus> {
   constructor(private httpClient: HttpClient) {
     super({
       pageData: new Page<Exam>(),
+      pageDataForMyExam: new Page<Exam>(),
       httpParams: {size: 0, page: 0, name: ''}
     });
   }
 
   static pageData(status: ExamStatus): Page<Exam> {
     return status.pageData;
+  }
+
+  static pageDataForMyExam(status: ExamStatus): Page<Exam> {
+    return status.pageDataForMyExam;
   }
 
   @Action()
@@ -51,6 +57,25 @@ export class ExamService extends Store<ExamStatus> {
     return this.httpClient.get<Page<Exam>>(`${this.url}/page`, {params: httpParams})
       .pipe(tap(data => {
         state.pageData = data as Page<Exam>;
+        this.next(state);
+      }));
+  }
+
+  @Action()
+  pageForMyExam(param: { page: number; size: number; name?: string;}, clazzId: number): Observable<Page<Exam>>  {
+    let httpParams = new HttpParams()
+      .append('page', param.page.toString())
+      .append('size', param.size.toString());
+    if (param.name) {
+      httpParams = httpParams.append('name', param.name);
+    }
+
+    const state = this.getState();
+    state.httpParams = param;
+
+    return this.httpClient.get<Page<Exam>>(`${this.url}/pageForMyExam/${clazzId}`, {params: httpParams})
+      .pipe(tap(data => {
+        state.pageDataForMyExam = data as Page<Exam>;
         this.next(state);
       }));
   }
@@ -90,6 +115,31 @@ export class ExamService extends Store<ExamStatus> {
   }
 
   clearExamQuestionsById(examId: number) {
-    return this.httpClient.get<boolean>(`${this.url}/clearExamQuestionsById/${examId}`);
+    return this.httpClient.get<Exam>(`${this.url}/clearExamQuestionsById/${examId}`);
+  }
+
+  @Action()
+  publish(examId: number) {
+    return this.httpClient.get<Exam>(`${this.url}/publish/${examId}`).pipe(tap(data => {
+      const state = this.getState();
+      this.page(state.httpParams);
+    }));
+  }
+
+
+  @Action()
+  back(examId: number) {
+    return this.httpClient.get<Exam>(`${this.url}/back/${examId}`).pipe(tap(data => {
+      const state = this.getState();
+      this.page(state.httpParams);
+    }));
+  }
+
+  @Action()
+  refreshState() {
+    return this.httpClient.get<boolean>(`${this.url}/refreshState`).pipe(tap(data => {
+      const state = this.getState();
+      this.page(state.httpParams);
+    }));
   }
 }

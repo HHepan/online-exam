@@ -19,7 +19,6 @@
         <ng-container *ngIf="currentQuestions.length > 0">
           <a class="btn btn-secondary mr-2" (click)="onCancelCurrentQuestions()">取消</a>
           <a class="btn btn-primary mr-2" (click)="onSaveExamQuestions()">保存</a>
-          <a class="btn btn-success">保存并发布</a>
         </ng-container>
       </div>
     </div>
@@ -38,7 +37,6 @@
       </div>
       <div class="col-4 text-right">
         <a class="btn btn-info mr-2" (click)="clearExamQuestions()">重置考试题目</a>
-        <a class="btn btn-success">发布</a>
       </div>
     </div>
   </div>

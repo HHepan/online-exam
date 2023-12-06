@@ -17,4 +17,13 @@ public interface ExamRepository extends PagingAndSortingRepository<Exam, Long>, 
 
         return this.findAll(specification, pageable);
     };
+
+    default Page<Exam> findAllByNameAndClazzId(String name, Long clazzId, Pageable pageable) {
+        Specification<Exam> specification = ExamSpecs.containingName(name)
+                .and(ExamSpecs.byClazzId(clazzId))
+                .and(ExamSpecs.byHasPublish());
+
+        return this.findAll(specification, pageable);
+    };
+
 }

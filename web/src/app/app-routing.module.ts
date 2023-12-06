@@ -80,6 +80,13 @@ const routes: Routes = [
         data: {
           title: '考试管理'
         }
+      },
+      {
+        path: 'my-exam',
+        loadChildren: () => import('./my-exam/my-exam.module').then(m => m.MyExamModule),
+        data: {
+          title: '我的考试'
+        }
       }
     ]
   }
