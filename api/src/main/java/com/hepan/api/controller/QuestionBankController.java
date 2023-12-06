@@ -55,6 +55,11 @@ public class QuestionBankController {
         return this.questionBankService.getById(id);
     }
 
+    @GetMapping("getAll")
+    @JsonView(PageJsonView.class)
+    public Iterable<QuestionBank> getAll() {
+        return this.questionBankService.getAll();
+    }
 
     @DeleteMapping("{id}")
     void delete(@PathVariable Long id) {

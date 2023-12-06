@@ -10,4 +10,6 @@ public interface ExamService {
     Page<Exam> page(String name, Pageable pageable);
 
     void deleteById(Long id);
+
+    Exam getById(Long id);
 }

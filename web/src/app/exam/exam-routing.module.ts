@@ -4,6 +4,7 @@ import {ExamComponent} from "./exam.component";
 import {DialogEntryComponent} from "../common/dialog-entry/dialog-entry.component";
 import {ExamAddComponent} from "./exam-add/exam-add.component";
 import {ExamEditComponent} from "./exam-edit/exam-edit.component";
+import {SetExamQuestionComponent} from "./set-exam-question/set-exam-question.component";
 
 const routes: Routes = [
   {
@@ -29,6 +30,10 @@ const routes: Routes = [
       }
     ]
   },
+  {
+    path: 'set-exam-question/:id',
+    component: SetExamQuestionComponent
+  }
 ];
 
 @NgModule({

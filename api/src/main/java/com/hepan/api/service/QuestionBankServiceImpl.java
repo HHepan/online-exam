@@ -32,4 +32,9 @@ public class QuestionBankServiceImpl implements QuestionBankService {
     public QuestionBank getById(Long id) {
         return this.questionBankRepository.findById(id).get();
     }
+
+    @Override
+    public Iterable<QuestionBank> getAll() {
+        return this.questionBankRepository.findAll();
+    }
 }

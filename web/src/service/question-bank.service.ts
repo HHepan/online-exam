@@ -5,6 +5,7 @@ import {Page} from "../app/common/page";
 import {environment} from "../environments/environment";
 import {Observable, tap} from "rxjs";
 import {HttpClient, HttpParams} from "@angular/common/http";
+import {Course} from "../entity/course";
 
 /**
  * 题库管理存储状态
@@ -84,6 +85,9 @@ export class QuestionBankService extends Store<QuestionBankStatus>  {
       state.getById = data as QuestionBank;
       this.next(state);
     }));
+  }
 
+  getAll(): Observable<QuestionBank[]> {
+    return this.httpClient.get<QuestionBank[]>(`${this.url}/getAll`);
   }
 }
