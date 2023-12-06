@@ -44,6 +44,10 @@ public class Exam {
     @JsonView(ClazzesJsonView.class)
     private List<Clazz> clazzes = new ArrayList<>();
 
+    @ManyToMany()
+    @JsonView(QuestionsJsonView.class)
+    private List<Question> questions = new ArrayList<>();
+
     public Long getId() { return id; }
 
     public void setId(Long id) { this.id = id; }
@@ -76,6 +80,10 @@ public class Exam {
 
     public void setUser(User user) { this.user = user; }
 
+    public List<Question> getQuestions() { return questions; }
+
+    public void setQuestions(List<Question> questions) { this.questions = questions; }
+
     public List<Clazz> getClazzes() { return clazzes; }
 
     public void setClazzes(List<Clazz> clazzes) { this.clazzes = clazzes; }
@@ -94,5 +102,13 @@ public class Exam {
     public interface ClazzesJsonView extends
             Clazz.IdJsonView,
             Clazz.NameJsonView
+    {}
+
+    public interface QuestionsJsonView extends
+            Question.IdJsonView,
+            Question.StemJsonView,
+            Question.OptionsJsonView,
+            Question.AnswerJsonView,
+            Question.QuestionBankJsonView
     {}
 }

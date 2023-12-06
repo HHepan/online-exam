@@ -1,6 +1,6 @@
 <div class="container">
   <div class="col-md-12 mt-2">
-    <div class="row">
+    <div class="row" *ngIf="!isCurrentQuestionsExit">
       <div class="col-8 text-left">
         <form class="form-inline" [formGroup]="formGroup">
           <label>请选择题库：</label>
@@ -10,15 +10,29 @@
         </form>
       </div>
       <div class="col-4 text-right">
-        <a class="btn btn-info mr-1" (click)="onRandomQuestions()">
+        <a class="btn btn-info mr-2" (click)="onRandomQuestions()">
           <ng-container *ngIf="currentQuestions.length === 0">随机出题</ng-container>
-          <ng-container *ngIf="currentQuestions.length > 0">重新出题</ng-container>
+          <ng-container *ngIf="currentQuestions.length > 0">再次随机</ng-container>
         </a>
         <ng-container *ngIf="currentQuestions.length > 0">
-          <a class="btn btn-secondary mr-1" (click)="onCancelCurrentQuestions()">取消</a>
-          <a class="btn btn-primary mr-1">保存</a>
+          <a class="btn btn-secondary mr-2" (click)="onCancelCurrentQuestions()">取消</a>
+          <a class="btn btn-primary mr-2" (click)="onSaveExamQuestions()">保存</a>
           <a class="btn btn-success">保存并发布</a>
         </ng-container>
+      </div>
+    </div>
+    <div class="row" *ngIf="isCurrentQuestionsExit">
+      <div class="col-8 text-left">
+        <form class="form-inline mt-2" [formGroup]="formGroup">
+          <label>当前题库：</label>
+          <div class="col-6">
+            {{ currentQuestions[0].questionBank.name }}({{ currentQuestions[0].questionBank.course.name }})
+          </div>
+        </form>
+      </div>
+      <div class="col-4 text-right">
+        <a class="btn btn-info mr-2" (click)="clearExamQuestions()">重置考试题目</a>
+        <a class="btn btn-success">发布</a>
       </div>
     </div>
   </div>

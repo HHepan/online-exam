@@ -35,9 +35,13 @@
     <tr *ngFor="let exam of pageData.content, index as i">
       <td>{{ i + 1 }}</td>
       <td>{{ exam.name }}</td>
-      <td>{{ exam.questionCount }}</td>
+      <td>
+        <label [ngClass]="{ 'text-danger': exam.questions.length < exam.questionCount}">
+          {{ exam.questions.length }}/{{ exam.questionCount }}
+        </label>
+      </td>
       <td>{{ exam.score }}</td>
-      <td>{{ exam.startTime | date: 'yyyy-MM-dd hh:mm'}} - {{ exam.endTime | date: 'yyyy-MM-dd hh:mm'}}</td>
+      <td>{{ exam.startTime | date: 'yyyy-MM-dd HH:mm'}} - {{ exam.endTime | date: 'yyyy-MM-dd HH:mm'}}</td>
       <td>
         <ng-container *ngFor="let clazz of exam.clazzes">
           {{ clazz.name }}
