@@ -1,0 +1,50 @@
+<div class="container">
+  <div class="col-md-12 mt-2">
+    <div class="row">
+      <div class="col-8 text-left">
+        <form class="form-inline" [formGroup]="formGroup">
+          <label>请选择题库：</label>
+          <div class="col-6">
+            <app-question-bank-select formControlName="questionBankId"></app-question-bank-select>
+          </div>
+        </form>
+      </div>
+      <div class="col-4 text-right">
+        <a class="btn btn-info mr-1" (click)="onRandomQuestions()">
+          <ng-container *ngIf="currentQuestions.length === 0">随机出题</ng-container>
+          <ng-container *ngIf="currentQuestions.length > 0">重新出题</ng-container>
+        </a>
+        <ng-container *ngIf="currentQuestions.length > 0">
+          <a class="btn btn-secondary mr-1" (click)="onCancelCurrentQuestions()">取消</a>
+          <a class="btn btn-primary mr-1">保存</a>
+          <a class="btn btn-success">保存并发布</a>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+  <hr>
+  <div style="background-color: #f9f8f4">
+    <ng-container *ngFor="let question of currentQuestions; index as i">
+      <div class="form-group row text-left col-form-label ml-1">
+        <div class="col-12">
+          {{ i + 1 }}.{{ question.stem }}
+          <a href="javascript:void(0);" class="ml-5" *ngIf="!isShowQuestionDetail(question.id)" (click)="viewDetail(question.id)">详情</a>
+          <ng-container *ngIf="isShowQuestionDetail(question.id)">
+            <a href="javascript:void(0);" class="ml-5" style="color: grey" (click)="cancelViewDetail(question.id)">取消</a>
+          </ng-container>
+        </div>
+      </div>
+      <ng-container *ngIf="isShowQuestionDetail(question.id)">
+        <div class="form-group row text-left col-form-label ml-5" *ngFor="let option of getOptionsArr(question.options)">
+          {{ option }}
+        </div>
+        <div class="form-group row text-left col-form-label ml-1">
+          <div class="col-12">
+            答案：{{ getAnswer(question.options, question.answer) }}
+          </div>
+        </div>
+      </ng-container>
+      <hr/>
+    </ng-container>
+  </div>
+</div>

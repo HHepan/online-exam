@@ -10,6 +10,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {SizeModule} from "../common/size/size.module";
 import {PageModule} from "../common/page/page.module";
 import { SetQuestionComponent } from './set-question/set-question.component';
+import { QuestionBankSelectComponent } from './question-bank-select/question-bank-select.component';
 
 
 
@@ -18,7 +19,11 @@ import { SetQuestionComponent } from './set-question/set-question.component';
     QuestionBankComponent,
     QuestionBankAddComponent,
     QuestionBankEditComponent,
-    SetQuestionComponent
+    SetQuestionComponent,
+    QuestionBankSelectComponent
+  ],
+  exports: [
+    QuestionBankSelectComponent
   ],
   imports: [
     CommonModule,

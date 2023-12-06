@@ -12,4 +12,6 @@ public interface QuestionBankService {
     void deleteById(Long id);
 
     QuestionBank getById(Long id);
+
+    Iterable<QuestionBank> getAll();
 }

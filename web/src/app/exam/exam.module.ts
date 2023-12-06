@@ -8,6 +8,9 @@ import {ClazzModule} from "../clazz/clazz.module";
 import {ReactiveFormsModule} from "@angular/forms";
 import {PageModule} from "../common/page/page.module";
 import {SizeModule} from "../common/size/size.module";
+import {PipeModule} from "../pipe/pipe.module";
+import { SetExamQuestionComponent } from './set-exam-question/set-exam-question.component';
+import {QuestionBankModule} from "../question-bank/question-bank.module";
 
 
 
@@ -15,7 +18,8 @@ import {SizeModule} from "../common/size/size.module";
   declarations: [
     ExamComponent,
     ExamAddComponent,
-    ExamEditComponent
+    ExamEditComponent,
+    SetExamQuestionComponent
   ],
   imports: [
     CommonModule,
@@ -23,7 +27,9 @@ import {SizeModule} from "../common/size/size.module";
     ClazzModule,
     ReactiveFormsModule,
     PageModule,
-    SizeModule
+    SizeModule,
+    PipeModule,
+    QuestionBankModule
   ]
 })
 export class ExamModule { }

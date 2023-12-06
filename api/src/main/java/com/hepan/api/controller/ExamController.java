@@ -3,6 +3,7 @@ package com.hepan.api.controller;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.hepan.api.entity.Course;
 import com.hepan.api.entity.Exam;
+import com.hepan.api.entity.QuestionBank;
 import com.hepan.api.service.ExamService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -53,7 +54,24 @@ public class ExamController {
         this.examService.deleteById(id);
     }
 
+    @GetMapping("{id}")
+    @JsonView(GetByIdJsonView.class)
+    Exam getById(@PathVariable Long id) {
+        return this.examService.getById(id);
+    }
+
     private interface PageJsonView extends
+            Exam.IdJsonView,
+            Exam.NameJsonView,
+            Exam.QuestionCountJsonView,
+            Exam.ScoreJsonView,
+            Exam.StartTimeJsonView,
+            Exam.EndTimeJsonView,
+            Exam.StateJsonView,
+            Exam.ClazzesJsonView
+    {}
+
+    private interface GetByIdJsonView extends
             Exam.IdJsonView,
             Exam.NameJsonView,
             Exam.QuestionCountJsonView,

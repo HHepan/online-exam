@@ -37,15 +37,23 @@
       <td>{{ exam.name }}</td>
       <td>{{ exam.questionCount }}</td>
       <td>{{ exam.score }}</td>
-      <td>{{ exam.startTime }} - {{ exam.endTime }}</td>
+      <td>{{ exam.startTime | date: 'yyyy-MM-dd hh:mm'}} - {{ exam.endTime | date: 'yyyy-MM-dd hh:mm'}}</td>
       <td>
         <ng-container *ngFor="let clazz of exam.clazzes">
           {{ clazz.name }}
         </ng-container>
       </td>
-      <td>{{ exam.state }}</td>
       <td>
-        <a class="btn btn-sm btn-info mr-2">设置题目</a>
+        <span class="badge"
+              [ngClass]="{ 'badge-secondary': exam.state === 0,
+                           'badge-primary': exam.state === 1,
+                           'badge-success': exam.state === 2,
+                           'badge-danger': exam.state === 3}">
+          {{ exam.state | examState}}
+        </span>
+      </td>
+      <td>
+        <a class="btn btn-sm btn-info mr-2" [routerLink]="'set-exam-question/' + exam.id">设置题目</a>
         <a class="btn btn-sm btn-success mr-2">发布</a>
         <a class="btn btn-sm btn-primary mr-2" routerLink="edit/1">编辑</a>
         <a class="btn btn-sm btn-danger" (click)="onDelete(exam)">删除</a>

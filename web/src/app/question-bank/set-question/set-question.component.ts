@@ -38,6 +38,7 @@ export class SetQuestionComponent implements OnInit{
   questionBankId: number;
 
   currentQuestionBank: QuestionBank | undefined;
+
   viewDetailArr: number[] = [];
 
   constructor(private route: ActivatedRoute,
@@ -173,10 +174,7 @@ export class SetQuestionComponent implements OnInit{
   }
 
   cancelViewDetail(id: number) {
-    console.log('before', this.viewDetailArr);
     this.viewDetailArr.splice(this.viewDetailArr.indexOf(id), 1);
-    console.log('after', this.viewDetailArr);
-
   }
 
   onDelete(question: Question) {

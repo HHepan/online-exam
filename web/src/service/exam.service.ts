@@ -6,6 +6,7 @@ import {Course} from "../entity/course";
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {environment} from "../environments/environment";
 import {Observable, tap} from "rxjs";
+import {QuestionBank} from "../entity/questionBank";
 
 
 /**
@@ -62,6 +63,15 @@ export class ExamService extends Store<ExamStatus> {
         this.next(state);
         this.page(state.httpParams);
       }));
+  }
+
+  @Action()
+  getById(examId: number): Observable<Exam>  {
+    return this.httpClient.get<Exam>(`${this.url}/${examId}`).pipe(tap(data => {
+      const state = this.getState();
+      state.getById = data as Exam;
+      this.next(state);
+    }));
   }
 
   @Action()
