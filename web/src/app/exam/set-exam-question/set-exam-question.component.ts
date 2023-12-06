@@ -5,6 +5,7 @@ import {Question} from "../../../entity/question";
 import {ActivatedRoute} from "@angular/router";
 import {ExamService} from "../../../service/exam.service";
 import {Exam} from "../../../entity/exam";
+import {CommonService} from "../../../service/common.service";
 
 @Component({
   selector: 'app-set-exam-question',
@@ -28,16 +29,33 @@ export class SetExamQuestionComponent implements OnInit {
 
   viewDetailArr: number[] = [];
 
+  isCurrentQuestionsExit: boolean = false;
+
   constructor(private questionBankService: QuestionBankService,
               private examService: ExamService,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              private commonService: CommonService) {
     this.examId = +this.route.snapshot.params['id'];
   }
 
   ngOnInit(): void {
     this.examService.getById(this.examId ? +this.examId : -1).subscribe(exam => {
       this.currentExam = exam;
+      console.log('exam', this.currentExam);
+      this.initCurrentQuestions();
     });
+  }
+
+  initCurrentQuestions() {
+    this.formGroup.get(this.keys.questionBankId)?.setValue(
+      this.currentExam?.questions[0]?.questionBank?.id.toString()
+    );
+
+    this.currentQuestions = this.currentExam ? this.currentExam.questions : [];
+
+    if (this.currentQuestions.length > 0) {
+      this.isCurrentQuestionsExit = true;
+    }
   }
 
   onRandomQuestions() {
@@ -132,5 +150,39 @@ export class SetExamQuestionComponent implements OnInit {
 
   onCancelCurrentQuestions() {
     this.currentQuestions = [];
+  }
+
+  onSaveExamQuestions() {
+    this.examService.saveExamQuestions(this.currentQuestions, this.examId).subscribe(res => {
+      this.commonService.success(() => {
+      }, '新增成功');
+      this.ngOnInit();
+    }, error => {
+      this.commonService.error(() => {
+      }, '新增失败');
+    });
+  }
+
+  clearExamQuestions() {
+    this.commonService.confirm(() => {
+      this.examService.clearExamQuestionsById(this.examId ? this.examId : -1).subscribe({
+          next: () => {
+            this.commonService.success(() => {
+            }, '重置成功');
+            this.clearCurrentQuestions();
+          },
+          error: () => {
+            this.commonService.error(() => {
+            }, '重置失败');
+          }
+        }
+      );
+    }, '即将清空' + this.currentExam?.name + '中的所有题目，清空后可重新设置');
+  }
+
+  clearCurrentQuestions() {
+    this.currentQuestions = [];
+    this.formGroup.get(this.keys.questionBankId)?.setValue(null);
+    this.isCurrentQuestionsExit = false;
   }
 }

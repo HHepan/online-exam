@@ -1,7 +1,11 @@
 package com.hepan.api.entity;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.hepan.api.service.QuestionBankService;
 import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Question {
@@ -24,6 +28,10 @@ public class Question {
     @JoinColumn(name = "question_bank_id")
     private QuestionBank questionBank;
 
+    @ManyToMany()
+    @JsonView(ExamsJsonView.class)
+    private List<Exam> exams = new ArrayList<>();
+
 
     public Long getId() { return id; }
 
@@ -45,9 +53,21 @@ public class Question {
 
     public void setQuestionBank(QuestionBank questionBank) { this.questionBank = questionBank; }
 
+    public List<Exam> getExams() { return exams; }
+
+    public void setExams(List<Exam> exams) { this.exams = exams; }
+
     public interface IdJsonView {}
     public interface StemJsonView {}
     public interface OptionsJsonView {}
     public interface AnswerJsonView {}
-    public interface QuestionBankJsonView {}
+    public interface QuestionBankJsonView extends
+            QuestionBank.IdJsonView,
+            QuestionBank.NameJsonView,
+            QuestionBank.CourseJsonView
+    {}
+    public interface ExamsJsonView extends
+            Exam.IdJsonView,
+            Exam.NameJsonView
+    {}
 }

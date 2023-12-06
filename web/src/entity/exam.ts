@@ -1,5 +1,6 @@
 import {User} from "./user";
 import {Clazz} from "./clazz";
+import {Question} from "./question";
 
 export interface Exam {
   id: number;
@@ -19,4 +20,6 @@ export interface Exam {
   state: number;
 
   clazzes: Clazz[];
+
+  questions: Question[];
 }

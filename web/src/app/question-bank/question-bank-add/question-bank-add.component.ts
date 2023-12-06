@@ -32,7 +32,6 @@ export class QuestionBankAddComponent {
   }
 
   onSubmit() {
-    console.log('QuestionBankAddComponent', this.formGroup.value);
     const questionBank = {
       name: this.formGroup.get(this.keys.name)?.value,
       course: {

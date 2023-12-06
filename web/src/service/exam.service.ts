@@ -7,6 +7,7 @@ import {HttpClient, HttpParams} from "@angular/common/http";
 import {environment} from "../environments/environment";
 import {Observable, tap} from "rxjs";
 import {QuestionBank} from "../entity/questionBank";
+import {Question} from "../entity/question";
 
 
 /**
@@ -82,5 +83,13 @@ export class ExamService extends Store<ExamStatus> {
       this.next(state);
       this.page(state.httpParams);
     }));
+  }
+
+  saveExamQuestions(currentQuestions: Question[], examId: number | undefined) {
+    return this.httpClient.post<any>(`${this.url}/saveExamQuestions/${examId}`, currentQuestions);
+  }
+
+  clearExamQuestionsById(examId: number) {
+    return this.httpClient.get<boolean>(`${this.url}/clearExamQuestionsById/${examId}`);
   }
 }
