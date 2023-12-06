@@ -2,6 +2,7 @@ package com.hepan.api.repository.specs;
 
 import com.hepan.api.entity.Course;
 import com.hepan.api.entity.Exam;
+import jakarta.persistence.criteria.JoinType;
 import org.springframework.data.jpa.domain.Specification;
 
 public class ExamSpecs {
@@ -17,5 +18,19 @@ public class ExamSpecs {
         } else {
             return Specification.where(null);
         }
+    }
+
+    public static Specification<Exam> byClazzId(Long clazzId) {
+        if (clazzId != null) {
+            return (root, criteriaQuery, criteriaBuilder) ->
+                    criteriaBuilder.equal(root.get("clazzes").get("id").as(Long.class),  clazzId);
+        } else {
+            return Specification.where(null);
+        }
+    }
+
+    public static Specification<Exam> byHasPublish() {
+        return (root, criteriaQuery, criteriaBuilder) ->
+                criteriaBuilder.notEqual(root.get("state").as(Long.class),  Exam.EXAM_UNPUBLISHED);
     }
 }

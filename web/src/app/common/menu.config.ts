@@ -48,6 +48,12 @@ export const menus: Array<BaseMenu> = [
     role: UserRole.TEACHER,
   },
   {
+    name: '我的考试',
+    url: 'my-exam',
+    icon: '',
+    role: UserRole.STUDENT,
+  },
+  {
     name: '个人中心',
     url: 'personal',
     icon: '',

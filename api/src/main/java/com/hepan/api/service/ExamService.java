@@ -19,4 +19,12 @@ public interface ExamService {
     Exam saveExamQuestions(Long id, List<Question> questions);
 
     Exam clearExamQuestionsById(Long id);
+
+    Exam publishExamById(Long id);
+
+    Exam backExamById(Long id);
+
+    void refreshState();
+
+    Page<Exam> pageForMyExam(String name, Long clazzId, Pageable pageable);
 }

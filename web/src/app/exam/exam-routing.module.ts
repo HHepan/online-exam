@@ -32,7 +32,10 @@ const routes: Routes = [
   },
   {
     path: 'set-exam-question/:id',
-    component: SetExamQuestionComponent
+    component: SetExamQuestionComponent,
+    data: {
+      title: '设置题目'
+    }
   }
 ];
 

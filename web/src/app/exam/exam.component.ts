@@ -96,4 +96,49 @@ export class ExamComponent implements OnInit {
       );
     }, '即将删除' + description);
   }
+
+  onPublish(exam: Exam) {
+    if (exam.questions.length > 0) {
+      this.examService.publish(exam.id).subscribe({
+        next: () => {
+          this.commonService.success(() => {
+          }, '发布成功');
+        },
+        error: () => {
+          this.commonService.error(() => {
+          }, '发布失败');
+        }
+      });
+    } else {
+      this.commonService.error(() => {
+      }, '请先设置题目');
+    }
+  }
+
+  onBack(id: number) {
+    this.examService.back(id).subscribe({
+      next: () => {
+        this.commonService.success(() => {
+        }, '撤回成功');
+      },
+      error: () => {
+        this.commonService.error(() => {
+        }, '撤回失败');
+      }
+    });
+  }
+
+  onRefreshState() {
+    this.examService.refreshState().subscribe({
+        next: () => {
+          this.commonService.success(() => {
+          }, '刷新成功');
+        },
+        error: () => {
+          this.commonService.error(() => {
+          }, '刷新失败');
+        }
+      }
+    );
+  }
 }

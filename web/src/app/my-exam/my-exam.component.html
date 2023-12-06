@@ -9,7 +9,6 @@
       </div>
       <div class="col-4 text-right">
         <a class="btn btn-link mr-2" (click)="onRefreshState()">刷新状态</a>
-        <a class="btn btn-primary" routerLink="add">新增</a>
       </div>
     </div>
   </div>
@@ -25,9 +24,8 @@
       <th>序号</th>
       <th>名称</th>
       <th>题目总数</th>
-      <th>总分</th>
+      <th>满分</th>
       <th>时间</th>
-      <th>考试班级</th>
       <th>状态</th>
       <th>操作</th>
     </tr>
@@ -36,33 +34,21 @@
     <tr *ngFor="let exam of pageData.content, index as i">
       <td>{{ i + 1 }}</td>
       <td>{{ exam.name }}</td>
-      <td>
-        <label [ngClass]="{ 'text-danger': exam.questions.length < exam.questionCount}">
-          {{ exam.questions.length }}/{{ exam.questionCount }}
-        </label>
-      </td>
+      <td>{{ exam.questionCount }}</td>
       <td>{{ exam.score }}</td>
       <td>{{ exam.startTime | date: 'yyyy-MM-dd HH:mm'}} - {{ exam.endTime | date: 'yyyy-MM-dd HH:mm'}}</td>
       <td>
-        <ng-container *ngFor="let clazz of exam.clazzes">
-          {{ clazz.name }}
-        </ng-container>
+      <span class="badge"
+            [ngClass]="{ 'badge-secondary': exam.state === 0,
+                         'badge-primary': exam.state === 1,
+                         'badge-success': exam.state === 2,
+                         'badge-danger': exam.state === 3}">
+        {{ exam.state | examState}}
+      </span>
       </td>
       <td>
-        <span class="badge"
-              [ngClass]="{ 'badge-secondary': exam.state === 0,
-                           'badge-primary': exam.state === 1,
-                           'badge-success': exam.state === 2,
-                           'badge-danger': exam.state === 3}">
-          {{ exam.state | examState}}
-        </span>
-      </td>
-      <td>
-        <a *ngIf="exam.state === 0" class="btn btn-sm btn-info mr-2" [routerLink]="'set-exam-question/' + exam.id">设置题目</a>
-        <a *ngIf="exam.state === 0" class="btn btn-sm btn-success mr-2" (click)="onPublish(exam)">发布</a>
-        <a *ngIf="exam.state === 1" class="btn btn-sm btn-dark mr-2" (click)="onBack(exam.id)">撤回</a>
-        <a *ngIf="exam.state === 0" class="btn btn-sm btn-primary mr-2" routerLink="edit/1">编辑</a>
-        <a *ngIf="exam.state === 0" class="btn btn-sm btn-danger" (click)="onDelete(exam)">删除</a>
+        <a class="btn btn-sm btn-primary mr-2">操作1</a>
+        <a class="btn btn-sm btn-danger">操作2</a>
       </td>
     </tr>
     </tbody>

@@ -41,6 +41,22 @@ public class ExamController {
     }
 
     /**
+     * 我的考试分页接口.
+     * @param name     名称
+     * @param pageable 分页数据.
+     * @return 分页我的考试
+     */
+    @GetMapping("pageForMyExam/{clazzId}")
+    @JsonView(PageJsonView.class)
+    public Page<Exam> pageForMyExam(
+            @RequestParam(required = false, defaultValue = "") String name,
+            @PathVariable Long clazzId,
+            @SortDefault.SortDefaults(@SortDefault(sort = "id", direction = Sort.Direction.DESC))
+            Pageable pageable) {
+        return this.examService.pageForMyExam(name, clazzId, pageable);
+    }
+
+    /**
      * 新增考试
      *
      * @param exam 新增考试数据
@@ -76,6 +92,24 @@ public class ExamController {
     @JsonView(GetByIdJsonView.class)
     Exam clearExamQuestionsById(@PathVariable Long id) {
         return this.examService.clearExamQuestionsById(id);
+    }
+
+    @GetMapping("publish/{id}")
+    @JsonView(GetByIdJsonView.class)
+    Exam publishExamById(@PathVariable Long id) {
+        return this.examService.publishExamById(id);
+    }
+
+    @GetMapping("back/{id}")
+    @JsonView(GetByIdJsonView.class)
+    Exam backExamById(@PathVariable Long id) {
+        return this.examService.backExamById(id);
+    }
+
+    @GetMapping("refreshState")
+    @JsonView(GetByIdJsonView.class)
+    void refreshState() {
+        this.examService.refreshState();
     }
 
     @GetMapping("{id}")
