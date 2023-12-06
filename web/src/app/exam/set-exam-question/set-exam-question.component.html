@@ -4,8 +4,10 @@
       <div class="col-8 text-left">
         <form class="form-inline" [formGroup]="formGroup">
           <label>请选择题库：</label>
-          <div class="col-6">
+          <div class="col-8">
             <app-question-bank-select formControlName="questionBankId"></app-question-bank-select>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本场考试题目总数：
+            {{ currentQuestions.length }}/{{ currentExam?.questionCount }}
           </div>
         </form>
       </div>
@@ -23,12 +25,16 @@
     </div>
     <div class="row" *ngIf="isCurrentQuestionsExit">
       <div class="col-8 text-left">
-        <form class="form-inline mt-2" [formGroup]="formGroup">
+        <div class="form-inline mt-2">
           <label>当前题库：</label>
-          <div class="col-6">
+          <div class="col-3">
             {{ currentQuestions[0].questionBank.name }}({{ currentQuestions[0].questionBank.course.name }})
           </div>
-        </form>
+          <label>本场考试题目总数：</label>
+          <div class="col-4">
+            {{ currentQuestions.length }}/{{ currentExam?.questionCount }}
+          </div>
+        </div>
       </div>
       <div class="col-4 text-right">
         <a class="btn btn-info mr-2" (click)="clearExamQuestions()">重置考试题目</a>
