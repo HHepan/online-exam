@@ -32,6 +32,7 @@ export class MyExamComponent implements OnInit {
     page: 0,
     size: environment.size,
     name: '',
+    paramId: 0
   };
 
   constructor(private userService: UserService,
@@ -40,9 +41,8 @@ export class MyExamComponent implements OnInit {
   ngOnInit(): void {
     this.userService.getCurrentLoginUser().subscribe(user => {
       this.student = user.student;
-      console.log('MyExamComponent student', this.student);
-      this.examService.pageForMyExam(this.param, this.student.clazz.id).subscribe(data => {
-        console.log('MyExamComponent data', data);
+      this.param.paramId = this.student.clazz.id;
+      this.examService.pageForMyExam(this.param).subscribe(data => {
         this.pageData = data;
       });
     });
@@ -73,7 +73,7 @@ export class MyExamComponent implements OnInit {
    * 查询
    */
   reload(): void {
-    this.examService.pageForMyExam(this.param, this.student?.clazz.id ? this.student?.clazz.id : -1);
+    this.examService.pageForMyExam(this.param);
   }
 
   /**

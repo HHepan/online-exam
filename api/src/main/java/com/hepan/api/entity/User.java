@@ -77,6 +77,7 @@ public class User {
             Student.ClazzJsonView
     {}
     public interface TeacherJsonView extends
+            Teacher.IdJsonView,
             Teacher.NameJsonView,
             Teacher.PhoneJsonView
     {}

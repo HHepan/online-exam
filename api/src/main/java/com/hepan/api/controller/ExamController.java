@@ -31,13 +31,14 @@ public class ExamController {
      * @param pageable 分页数据.
      * @return 分页考试
      */
-    @GetMapping("page")
+    @GetMapping("page/{teacherId}")
     @JsonView(PageJsonView.class)
     public Page<Exam> page(
             @RequestParam(required = false, defaultValue = "") String name,
+            @PathVariable Long teacherId,
             @SortDefault.SortDefaults(@SortDefault(sort = "id", direction = Sort.Direction.DESC))
             Pageable pageable) {
-        return this.examService.page(name, pageable);
+        return this.examService.page(name, teacherId, pageable);
     }
 
     /**

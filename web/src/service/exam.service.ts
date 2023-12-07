@@ -2,11 +2,9 @@ import { Injectable } from '@angular/core';
 import {Action, Store} from "@tethys/store";
 import {Page} from "../app/common/page";
 import {Exam} from "../entity/exam";
-import {Course} from "../entity/course";
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {environment} from "../environments/environment";
 import {Observable, tap} from "rxjs";
-import {QuestionBank} from "../entity/questionBank";
 import {Question} from "../entity/question";
 
 
@@ -16,7 +14,7 @@ import {Question} from "../entity/question";
 interface ExamStatus extends Store<ExamService> {
   pageData: Page<Exam>;
   pageDataForMyExam: Page<Exam>;
-  httpParams: { size: number; page: number; name?: string;};
+  httpParams: { size: number; page: number; name?: string; paramId?: number};
   getById: Exam;
 }
 @Injectable({
@@ -29,7 +27,7 @@ export class ExamService extends Store<ExamStatus> {
     super({
       pageData: new Page<Exam>(),
       pageDataForMyExam: new Page<Exam>(),
-      httpParams: {size: 0, page: 0, name: ''}
+      httpParams: {size: 0, page: 0, name: '', paramId: 0}
     });
   }
 
@@ -42,7 +40,7 @@ export class ExamService extends Store<ExamStatus> {
   }
 
   @Action()
-  page(param: { page: number; size: number; name?: string;}): Observable<Page<Exam>>  {
+  page(param: { page: number; size: number; name?: string; paramId?: number}): Observable<Page<Exam>>  {
     let httpParams = new HttpParams()
       .append('page', param.page.toString())
       .append('size', param.size.toString());
@@ -53,8 +51,7 @@ export class ExamService extends Store<ExamStatus> {
     const state = this.getState();
     state.httpParams = param;
 
-
-    return this.httpClient.get<Page<Exam>>(`${this.url}/page`, {params: httpParams})
+    return this.httpClient.get<Page<Exam>>(`${this.url}/page/${param.paramId}`, {params: httpParams})
       .pipe(tap(data => {
         state.pageData = data as Page<Exam>;
         this.next(state);
@@ -62,7 +59,7 @@ export class ExamService extends Store<ExamStatus> {
   }
 
   @Action()
-  pageForMyExam(param: { page: number; size: number; name?: string;}, clazzId: number): Observable<Page<Exam>>  {
+  pageForMyExam(param: { page: number; size: number; name?: string; paramId: number}): Observable<Page<Exam>>  {
     let httpParams = new HttpParams()
       .append('page', param.page.toString())
       .append('size', param.size.toString());
@@ -73,7 +70,7 @@ export class ExamService extends Store<ExamStatus> {
     const state = this.getState();
     state.httpParams = param;
 
-    return this.httpClient.get<Page<Exam>>(`${this.url}/pageForMyExam/${clazzId}`, {params: httpParams})
+    return this.httpClient.get<Page<Exam>>(`${this.url}/pageForMyExam/${param.paramId}`, {params: httpParams})
       .pipe(tap(data => {
         state.pageDataForMyExam = data as Page<Exam>;
         this.next(state);

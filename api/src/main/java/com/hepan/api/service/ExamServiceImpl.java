@@ -24,8 +24,8 @@ public class ExamServiceImpl implements ExamService {
     }
 
     @Override
-    public Page<Exam> page(String name, Pageable pageable) {
-        return this.examRepository.findAllByName(name, pageable);
+    public Page<Exam> page(String name, Long teacherId, Pageable pageable) {
+        return this.examRepository.findAllByNameAndTeacherId(name, teacherId,  pageable);
     }
 
     @Override
