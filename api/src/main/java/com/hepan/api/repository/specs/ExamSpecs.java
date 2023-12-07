@@ -33,4 +33,13 @@ public class ExamSpecs {
         return (root, criteriaQuery, criteriaBuilder) ->
                 criteriaBuilder.notEqual(root.get("state").as(Long.class),  Exam.EXAM_UNPUBLISHED);
     }
+
+    public static Specification<Exam> byTeacherId(Long teacherId) {
+        if (teacherId != null) {
+            return (root, criteriaQuery, criteriaBuilder) ->
+                    criteriaBuilder.equal(root.get("user").get("teacher").get("id").as(Long.class),  teacherId);
+        } else {
+            return Specification.where(null);
+        }
+    }
 }

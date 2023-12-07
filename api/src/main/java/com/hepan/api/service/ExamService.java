@@ -10,7 +10,7 @@ import java.util.List;
 public interface ExamService {
     Exam save(Exam exam);
 
-    Page<Exam> page(String name, Pageable pageable);
+    Page<Exam> page(String name, Long teacherId, Pageable pageable);
 
     void deleteById(Long id);
 

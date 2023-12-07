@@ -6,6 +6,8 @@ import {CommonService} from "../../service/common.service";
 import {ActivatedRoute} from "@angular/router";
 import {Exam} from "../../entity/exam";
 import {ExamService} from "../../service/exam.service";
+import {UserService} from "../../service/user.service";
+import {Teacher} from "../../entity/teacher";
 
 @Component({
   selector: 'app-exam',
@@ -19,6 +21,8 @@ export class ExamComponent implements OnInit {
 
   pageData = new Page<Exam>();
 
+  teacher: Teacher | undefined;
+
   keys = {
     page: 'page',
     size: 'size',
@@ -29,17 +33,22 @@ export class ExamComponent implements OnInit {
     page: 0,
     size: environment.size,
     name: '',
+    paramId: 0
   };
-
 
   constructor(private commonService: CommonService,
               private route: ActivatedRoute,
-              private examService: ExamService) {
+              private examService: ExamService,
+              private userService: UserService) {
   }
 
   ngOnInit(): void {
-    this.examService.page(this.param).subscribe(data => {
-      this.pageData = data;
+    this.userService.getCurrentLoginUser().subscribe(user => {
+      this.teacher = user.teacher;
+      this.param.paramId = user.teacher.id;
+      this.examService.page(this.param).subscribe(data => {
+        this.pageData = data;
+      });
     });
     this.examService.select(ExamService.pageData).subscribe(data => {
       this.pageData = data;

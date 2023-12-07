@@ -12,8 +12,9 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 public interface ExamRepository extends PagingAndSortingRepository<Exam, Long>, CrudRepository<Exam, Long>, JpaSpecificationExecutor<Exam> {
     Iterable<Exam> findAll();
 
-    default Page<Exam> findAllByName(String name, Pageable pageable) {
-        Specification<Exam> specification = ExamSpecs.containingName(name);
+    default Page<Exam> findAllByNameAndTeacherId(String name, Long teacherId, Pageable pageable) {
+        Specification<Exam> specification = ExamSpecs.containingName(name)
+                .and(ExamSpecs.byTeacherId(teacherId));
 
         return this.findAll(specification, pageable);
     };
