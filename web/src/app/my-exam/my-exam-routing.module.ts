@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import {RouterModule, Routes} from "@angular/router";
 import {MyExamComponent} from "./my-exam.component";
+import {ExamingComponent} from "./examing/examing.component";
 
 const routes: Routes = [
   {
@@ -8,6 +9,13 @@ const routes: Routes = [
     component: MyExamComponent,
     data: {
       title: '列表'
+    }
+  },
+  {
+    path: 'examing/:id',
+    component: ExamingComponent,
+    data: {
+      title: '考试中'
     }
   }
 ];

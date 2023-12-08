@@ -63,6 +63,7 @@
         <a *ngIf="exam.state === 1" class="btn btn-sm btn-dark mr-2" (click)="onBack(exam.id)">撤回</a>
         <a *ngIf="exam.state === 0" class="btn btn-sm btn-primary mr-2" routerLink="edit/1">编辑</a>
         <a *ngIf="exam.state === 0" class="btn btn-sm btn-danger" (click)="onDelete(exam)">删除</a>
+        <a *ngIf="exam.state !== 0" class="btn btn-sm btn-info" [routerLink]="'view-exam-question/' + exam.id">查看题目</a>
       </td>
     </tr>
     </tbody>
