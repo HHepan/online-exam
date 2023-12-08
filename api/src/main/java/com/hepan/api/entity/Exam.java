@@ -48,6 +48,10 @@ public class Exam {
     @JsonView(QuestionsJsonView.class)
     private List<Question> questions = new ArrayList<>();
 
+    @OneToOne( mappedBy = "exam" )
+    @JsonView(AnswerStatusJsonView.class)
+    private AnswerStatus answerStatus;
+
     public Long getId() { return id; }
 
     public void setId(Long id) { this.id = id; }
@@ -88,6 +92,14 @@ public class Exam {
 
     public void setClazzes(List<Clazz> clazzes) { this.clazzes = clazzes; }
 
+    public AnswerStatus getAnswerStatus() {
+        return answerStatus;
+    }
+
+    public void setAnswerStatus(AnswerStatus answerStatus) {
+        this.answerStatus = answerStatus;
+    }
+
     public interface IdJsonView {}
     public interface NameJsonView {}
     public interface QuestionCountJsonView {}
@@ -95,6 +107,7 @@ public class Exam {
     public interface StartTimeJsonView {}
     public interface EndTimeJsonView {}
     public interface StateJsonView {}
+    public interface AnswerStatusJsonView {}
     public interface UserJsonView extends
             User.IdJsonView,
             User.UsernameJsonView

@@ -35,7 +35,7 @@ public class User {
     @JsonView(TeacherJsonView.class)
     private Teacher teacher;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany( mappedBy = "user" )
     @JsonView(ExamJsonView.class)
     private List<Exam> exams = new ArrayList<>();
 
@@ -72,6 +72,7 @@ public class User {
     public interface PasswordJsonView {}
     public interface RoleJsonView {}
     public interface StudentJsonView extends
+            Student.IdJsonView,
             Student.NameJsonView,
             Student.SnoJsonView,
             Student.ClazzJsonView

@@ -32,6 +32,10 @@ public class Question {
     @JsonView(ExamsJsonView.class)
     private List<Exam> exams = new ArrayList<>();
 
+    @OneToOne( mappedBy = "question" )
+    @JsonView(Student.AnswerStatusJsonView.class)
+    private AnswerStatus answerStatus;
+
 
     public Long getId() { return id; }
 
@@ -57,10 +61,19 @@ public class Question {
 
     public void setExams(List<Exam> exams) { this.exams = exams; }
 
+    public AnswerStatus getAnswerStatus() {
+        return answerStatus;
+    }
+
+    public void setAnswerStatus(AnswerStatus answerStatus) {
+        this.answerStatus = answerStatus;
+    }
+
     public interface IdJsonView {}
     public interface StemJsonView {}
     public interface OptionsJsonView {}
     public interface AnswerJsonView {}
+    public interface AnswerStatusJsonView {}
     public interface QuestionBankJsonView extends
             QuestionBank.IdJsonView,
             QuestionBank.NameJsonView,

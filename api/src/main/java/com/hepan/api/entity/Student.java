@@ -25,6 +25,10 @@ public class Student {
     @JsonView(UserJsonView.class)
     private User user;
 
+    @OneToOne( mappedBy = "student" )
+    @JsonView(AnswerStatusJsonView.class)
+    private AnswerStatus answerStatus;
+
     public Long getId() { return id; }
 
     public void setId(Long id) { this.id = id; }
@@ -53,9 +57,18 @@ public class Student {
         this.user = user;
     }
 
+    public AnswerStatus getAnswerStatus() {
+        return answerStatus;
+    }
+
+    public void setAnswerStatus(AnswerStatus answerStatus) {
+        this.answerStatus = answerStatus;
+    }
+
     public interface IdJsonView {}
     public interface NameJsonView {}
     public interface SnoJsonView {}
+    public interface AnswerStatusJsonView {}
     public interface UserJsonView extends
             User.IdJsonView,
             User.UsernameJsonView,

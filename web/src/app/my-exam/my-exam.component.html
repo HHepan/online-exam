@@ -47,7 +47,7 @@
       </span>
       </td>
       <td>
-        <a *ngIf="exam.state === 2" class="btn btn-sm btn-info">开始考试</a>
+        <a *ngIf="exam.state === 2" class="btn btn-sm btn-info" (click)="intoExaming(exam.id)">进入考试</a>
       </td>
     </tr>
     </tbody>

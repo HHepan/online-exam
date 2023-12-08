@@ -6,12 +6,14 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {PageModule} from "../common/page/page.module";
 import {PipeModule} from "../pipe/pipe.module";
 import {SizeModule} from "../common/size/size.module";
+import { ExamingComponent } from './examing/examing.component';
 
 
 
 @NgModule({
   declarations: [
-    MyExamComponent
+    MyExamComponent,
+    ExamingComponent
   ],
   imports: [
     CommonModule,

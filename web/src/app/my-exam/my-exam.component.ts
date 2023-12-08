@@ -7,6 +7,7 @@ import {FormControl, FormGroup} from "@angular/forms";
 import {Page} from "../common/page";
 import {Exam} from "../../entity/exam";
 import {CommonService} from "../../service/common.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-my-exam',
@@ -37,7 +38,8 @@ export class MyExamComponent implements OnInit {
 
   constructor(private userService: UserService,
               private examService: ExamService,
-              private commonService: CommonService) { }
+              private commonService: CommonService,
+              private router: Router) { }
   ngOnInit(): void {
     this.userService.getCurrentLoginUser().subscribe(user => {
       this.student = user.student;
@@ -97,5 +99,13 @@ export class MyExamComponent implements OnInit {
         }
       }
     );
+  }
+
+  intoExaming(id: number) {
+    this.commonService.confirm(() => {
+      this.router.navigateByUrl('my-exam/examing/' + id).then();
+    }, '考试须知：' +
+      '（1）进入考试后请勿退出考试界面，若推出则您的作答情况将不会被保存。\n' +
+      '（2）若考试时间到您仍未提交，则系统将为您自动提交。');
   }
 }

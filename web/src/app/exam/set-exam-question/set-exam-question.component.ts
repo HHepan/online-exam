@@ -25,6 +25,8 @@ export class SetExamQuestionComponent implements OnInit {
 
   currentExam: Exam | undefined;
 
+  title: string | undefined;
+
   currentQuestions: Question[] = [];
 
   viewDetailArr: number[] = [];
@@ -36,6 +38,8 @@ export class SetExamQuestionComponent implements OnInit {
               private route: ActivatedRoute,
               private commonService: CommonService) {
     this.examId = +this.route.snapshot.params['id'];
+    this.title = this.route.snapshot.data['title'];
+    console.log('title', this.title);
   }
 
   ngOnInit(): void {

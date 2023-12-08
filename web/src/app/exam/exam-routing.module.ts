@@ -36,6 +36,13 @@ const routes: Routes = [
     data: {
       title: '设置题目'
     }
+  },
+  {
+    path: 'view-exam-question/:id',
+    component: SetExamQuestionComponent,
+    data: {
+      title: '查看题目'
+    }
   }
 ];
 
