@@ -9,7 +9,7 @@ import {Question} from "../entity/question";
 
 
 /**
- * 课程管理存储状态
+ * 考试管理存储状态
  * */
 interface ExamStatus extends Store<ExamService> {
   pageData: Page<Exam>;

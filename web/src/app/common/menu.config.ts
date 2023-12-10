@@ -18,14 +18,14 @@ export const menus: Array<BaseMenu> = [
     role: UserRole.ADMIN,
   },
   {
-    name: '学生管理',
-    url: 'student',
+    name: '班级管理',
+    url: 'clazz',
     icon: '',
     role: UserRole.ADMIN,
   },
   {
-    name: '班级管理',
-    url: 'clazz',
+    name: '学生管理',
+    url: 'student',
     icon: '',
     role: UserRole.ADMIN,
   },

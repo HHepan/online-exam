@@ -1,0 +1,49 @@
+<div class="container" *ngIf="AnswerStatusesOfCurrentExam.length > 0">
+  <div class="form-group">
+    <div class="row">
+      <div class="col-6 text-left mt-4">
+        <h5>{{ exam?.name }}-共{{ exam?.questionCount }}题</h5>
+      </div>
+    </div>
+  </div>
+  <hr/>
+  <div style="background-color: #f9f8f4">
+    <ng-container *ngFor="let answerStatus of AnswerStatusesOfCurrentExam; index as i">
+      <div class="form-group row text-left col-form-label ml-1">
+        <div class="col-12">
+          {{ i + 1 }}.{{ answerStatus.question.stem }}
+          <label *ngIf="answerStatus.question.options !== '' && answerStatus.correctAnswer !== answerStatus.stuAnswer" style="color: #D01E21">
+            (错误)
+          </label>
+          <a href="javascript:void(0);" class="ml-5" *ngIf="!isShowQuestionDetail(answerStatus.question.id)" (click)="viewDetail(answerStatus.question.id)">详情</a>
+          <ng-container *ngIf="isShowQuestionDetail(answerStatus.question.id)">
+            <a href="javascript:void(0);" class="ml-5" style="color: grey" (click)="cancelViewDetail(answerStatus.question.id)">取消</a>
+          </ng-container>
+        </div>
+      </div>
+      <ng-container *ngIf="isShowQuestionDetail(answerStatus.question.id)">
+        <div class="form-group row text-left col-form-label ml-5" *ngFor="let option of getOptionsArr(answerStatus.question.options)">
+<!--          <div [style]="{color: getAnswer(answerStatus.question.options, answerStatus.stuAnswer) === option ? '#04f3de' : '#D01E21'}">-->
+            {{ option }}
+<!--          </div>-->
+        </div>
+        <div class="form-group row text-left col-form-label ml-1">
+          <div class="col-12">
+            正确答案：{{ getAnswer(answerStatus.question.options, answerStatus.question.answer) }}
+          </div>
+        </div>
+        <div class="form-group row text-left col-form-label ml-1">
+          <div class="col-12">
+            您的答案：{{ getAnswer(answerStatus.question.options, answerStatus.stuAnswer) }}
+          </div>
+        </div>
+      </ng-container>
+      <hr/>
+    </ng-container>
+  </div>
+</div>
+<div class="container" *ngIf="AnswerStatusesOfCurrentExam.length === 0">
+  <div class="text-center mt-5">
+    <h1>您未参加本场考试或未按时交卷</h1>
+  </div>
+</div>

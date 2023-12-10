@@ -76,35 +76,36 @@ export class ExamingComponent implements OnInit {
   }
 
   onSave() {
-    this.userService.getCurrentLoginUser().subscribe(user => {
-      let i = 0;
-      this.exam?.questions.forEach(ques => {
-        const answerStatus = {
-          student: {
-            id: user.student.id
-          },
-          exam: {
-            id: this.exam?.id
-          },
-          question: {
-            id: ques.id
-          },
-          stuAnswer: this.getStuAnswer(this.formGroup.get(ques.id.toString())?.value, ques.options),
-          correctAnswer: ques.answer
-        } as AnswerStatus;
-        console.log('onSave answerStatus', answerStatus);
-        this.answerStatusService.save(answerStatus).subscribe(res => {
-          i++;
-        }, () => {
-          this.commonService.error(() => {}, '交卷失败');
+    this.commonService.confirm(() => {
+      this.userService.getCurrentLoginUser().subscribe(user => {
+        let i = 0;
+        this.exam?.questions.forEach(ques => {
+          const answerStatus = {
+            student: {
+              id: user.student.id
+            },
+            exam: {
+              id: this.exam?.id
+            },
+            question: {
+              id: ques.id
+            },
+            stuAnswer: this.getStuAnswer(this.formGroup.get(ques.id.toString())?.value, ques.options),
+            correctAnswer: ques.answer
+          } as AnswerStatus;
+          this.answerStatusService.save(answerStatus).subscribe(res => {
+            i++;
+            if (i === this.exam?.questions.length) {
+              this.commonService.success(() => {
+                this.router.navigateByUrl('my-exam').then();
+              }, '交卷成功');
+            }
+          }, () => {
+            this.commonService.error(() => {}, '交卷失败');
+          });
         });
       });
-      if (i === this.exam?.questions.length) {
-        this.commonService.success(() => {
-          this.router.navigateByUrl('my-exam').then();
-        }, '交卷成功');
-      }
-    });
+    }, '即将交卷');
   }
 
   getStuAnswer(value: ɵGetProperty<ɵTypedOrUntyped<{}, ɵFormGroupRawValue<{}>, any>, string> | undefined, options: string) {
