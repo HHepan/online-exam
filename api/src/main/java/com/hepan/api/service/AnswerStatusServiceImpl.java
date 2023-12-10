@@ -23,4 +23,11 @@ public class AnswerStatusServiceImpl implements AnswerStatusService {
     public Iterable<AnswerStatus> getAllByExamIdAndStudentId(Long examId, Long studentId) {
         return this.answerStatusRepository.findAllByExamIdAndStudentId(examId, studentId);
     }
+
+    @Override
+    public AnswerStatus saveScoreById(Long answerStatusId, Long score) {
+        AnswerStatus answerStatus = this.answerStatusRepository.findById(answerStatusId).get();
+        answerStatus.setScore(score);
+        return this.answerStatusRepository.save(answerStatus);
+    }
 }

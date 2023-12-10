@@ -5,6 +5,8 @@ import {DialogEntryComponent} from "../common/dialog-entry/dialog-entry.componen
 import {ExamAddComponent} from "./exam-add/exam-add.component";
 import {ExamEditComponent} from "./exam-edit/exam-edit.component";
 import {SetExamQuestionComponent} from "./set-exam-question/set-exam-question.component";
+import {ExamSituationComponent} from "./exam-situation/exam-situation.component";
+import {TchViewExamComponent} from "./tch-view-exam/tch-view-exam.component";
 
 const routes: Routes = [
   {
@@ -42,6 +44,20 @@ const routes: Routes = [
     component: SetExamQuestionComponent,
     data: {
       title: '查看题目'
+    }
+  },
+  {
+    path: 'exam-situation/:id',
+    component: ExamSituationComponent,
+    data: {
+      title: '考试情况'
+    }
+  },
+  {
+    path: 'exam-situation/:examId/tch-view-exam/:studentId',
+    component: TchViewExamComponent,
+    data: {
+      title: '作答详情'
     }
   }
 ];

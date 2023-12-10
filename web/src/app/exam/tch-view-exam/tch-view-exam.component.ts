@@ -1,41 +1,49 @@
 import {Component, OnInit} from '@angular/core';
-import {UserService} from "../../../service/user.service";
-import {ActivatedRoute, Router} from "@angular/router";
+import {ActivatedRoute} from "@angular/router";
 import {AnswerStatusService} from "../../../service/answer-status.service";
-import {Student} from "../../../entity/student";
-import {AnswerStatus} from "../../../entity/answerStatus";
 import {Exam} from "../../../entity/exam";
+import {AnswerStatus} from "../../../entity/answerStatus";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {CommonService} from "../../../service/common.service";
 
 @Component({
-  selector: 'app-stu-view-exam',
-  templateUrl: './stu-view-exam.component.html',
-  styleUrls: ['./stu-view-exam.component.css']
+  selector: 'app-tch-view-exam',
+  templateUrl: './tch-view-exam.component.html',
+  styleUrls: ['./tch-view-exam.component.css']
 })
-export class StuViewExamComponent implements OnInit {
+export class TchViewExamComponent implements OnInit {
+  formGroup = new FormGroup({
+    score: new FormControl('', [Validators.required]),
+  });
+
+  keys = {
+    score: 'score'
+  }
+
   viewDetailArr: number[] = [];
 
   exam: Exam | undefined;
 
-  examId: number | undefined;
-
-  student: Student | undefined;
-
   AnswerStatusesOfCurrentExam: AnswerStatus[] = [];
-  constructor(private userService: UserService,
-              private answerStatusService: AnswerStatusService,
-              private route: ActivatedRoute) {
-    this.examId = +this.route.snapshot.params['id'];
+
+  examId: number;
+
+  studentId: number;
+  constructor(private answerStatusService: AnswerStatusService,
+              private route: ActivatedRoute,
+              private commonService: CommonService) {
+    this.examId = +this.route.snapshot.params['examId'];
+    this.studentId = +this.route.snapshot.params['studentId'];
   }
 
-  ngOnInit(): void {
-    this.userService.getCurrentLoginUser().subscribe(user => {
-      this.student = user.student;
-      this.answerStatusService.getAllByExamIdAndStudentId(this.examId ? this.examId : 0, user.student.id)
-        .subscribe(res => {
+  ngOnInit() {
+    this.answerStatusService.getAllByExamIdAndStudentId(this.examId ? this.examId : 0, this.studentId)
+      .subscribe(res => {
+        if (res.length > 0) {
           this.exam = res[0].exam;
           this.AnswerStatusesOfCurrentExam = res;
-        });
-    });
+        }
+      });
   }
 
   isShowQuestionDetail(id: number): boolean {
@@ -94,5 +102,17 @@ export class StuViewExamComponent implements OnInit {
 
   cancelViewDetail(id: number) {
     this.viewDetailArr.splice(this.viewDetailArr.indexOf(id), 1);
+  }
+
+  onScoreSave(answerStatusId: number) {
+    const score = this.formGroup.get(this.keys.score)?.value;
+    this.answerStatusService.saveScoreById(answerStatusId, score).subscribe(res => {
+      this.commonService.success(() => {
+        this.ngOnInit();
+      }, '新增成功');
+    }, error => {
+      this.commonService.error(() => {
+      }, '新增失败');
+    });
   }
 }

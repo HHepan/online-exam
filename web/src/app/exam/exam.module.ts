@@ -11,6 +11,8 @@ import {SizeModule} from "../common/size/size.module";
 import {PipeModule} from "../pipe/pipe.module";
 import { SetExamQuestionComponent } from './set-exam-question/set-exam-question.component';
 import {QuestionBankModule} from "../question-bank/question-bank.module";
+import { ExamSituationComponent } from './exam-situation/exam-situation.component';
+import { TchViewExamComponent } from './tch-view-exam/tch-view-exam.component';
 
 
 
@@ -19,7 +21,9 @@ import {QuestionBankModule} from "../question-bank/question-bank.module";
     ExamComponent,
     ExamAddComponent,
     ExamEditComponent,
-    SetExamQuestionComponent
+    SetExamQuestionComponent,
+    ExamSituationComponent,
+    TchViewExamComponent
   ],
   imports: [
     CommonModule,

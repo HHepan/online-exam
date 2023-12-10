@@ -12,6 +12,7 @@ import {Action, Store} from "@tethys/store";
  * */
 interface StudentStatus extends Store<Student> {
   pageData: Page<Student>;
+  pageDataByClazzIds: Page<Student>;
   httpParams: { size: number; page: number; name?: string; sno?: string};
   getById: Student;
 }
@@ -52,6 +53,30 @@ export class StudentService extends Store<StudentStatus> {
     return this.httpClient.get<Page<Student>>(`${this.url}/page`, {params: httpParams})
       .pipe(tap(data => {
         state.pageData = data as Page<Student>;
+        this.next(state);
+      }));
+  }
+
+  @Action()
+  pageByClazzIds(param: { page: number; size: number; name?: string; sno?: string}, clazzIds: number[]): Observable<Page<Student>>  {
+    let httpParams = new HttpParams()
+      .append('page', param.page.toString())
+      .append('size', param.size.toString());
+    if (param.name) {
+      httpParams = httpParams.append('name', param.name);
+    }
+    if (param.sno) {
+      httpParams = httpParams.append('sno', param.sno);
+    }
+    if (clazzIds) {
+      httpParams = httpParams.append('clazzIds', clazzIds.toString());
+    }
+
+    const state = this.getState();
+
+    return this.httpClient.get<Page<Student>>(`${this.url}/pageByClazzIds`, {params: httpParams})
+      .pipe(tap(data => {
+        state.pageDataByClazzIds = data as Page<Student>;
         this.next(state);
       }));
   }

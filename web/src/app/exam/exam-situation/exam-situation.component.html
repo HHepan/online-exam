@@ -1,0 +1,48 @@
+<div>
+  <div class="row mb-2">
+    <div class="col-6 text-left">
+      <app-size [size]="pageData.size" (changeSize)="onSizeChange($event)"></app-size>
+    </div>
+  </div>
+  <table class="table table-striped mt-3">
+    <thead class="table-primary">
+    <tr class="info">
+      <th>序号</th>
+      <th>姓名</th>
+      <th>学号</th>
+      <th>班级</th>
+      <th>考试状态</th>
+      <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let student of pageData.content, index as i">
+      <td>{{ i + 1}}</td>
+      <td>{{ student.name }}</td>
+      <td>{{ student.sno }}</td>
+      <td>{{ student.clazz.name }}</td>
+      <td>
+        {{ getExamStatusByStudentId(student.id) }}
+        <ng-container *ngIf="exam?.state === 3">
+          <span class="badge badge-warning">已提交</span>
+        </ng-container>
+        <ng-container *ngIf="exam?.state !== 3">
+          <span *ngIf="studentsExamStatus === 'submitted'" class="badge badge-warning">已提交</span>
+          <span *ngIf="studentsExamStatus === 'examing'"class="badge badge-success">考试中</span>
+        </ng-container>
+      </td>
+      <td>
+        <a *ngIf="exam?.state === 3 || studentsExamStatus === 'submitted'"
+           class="btn btn-sm btn-success mr-2"
+           [routerLink]="'tch-view-exam/' + student.id"
+        >查看/批改</a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <app-page [page]="pageData.number"
+            [size]="pageData.size"
+            [totalElements]="pageData.totalElements"
+            (changePage)="onPageChange($event)"></app-page>
+</div>
+<router-outlet></router-outlet>
