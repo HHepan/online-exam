@@ -22,4 +22,10 @@ export class AnswerStatusService {
       .append('studentId', studentId.toString());
     return this.httpClient.get<AnswerStatus[]>(`${this.url}/getAllByExamIdAndStudentId`, {params: httpParams})
   }
+
+  saveScoreById(answerStatusId: number, score: string) {
+    let httpParams = new HttpParams()
+      .append('score', score.toString())
+    return this.httpClient.get<AnswerStatus>(`${this.url}/saveScoreById/${answerStatusId}`, {params: httpParams});
+  }
 }

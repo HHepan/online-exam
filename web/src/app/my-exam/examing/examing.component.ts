@@ -76,10 +76,19 @@ export class ExamingComponent implements OnInit {
   }
 
   onSave() {
+    const points = this.exam ? this.exam?.score / this.exam?.questionCount : 0;
     this.commonService.confirm(() => {
       this.userService.getCurrentLoginUser().subscribe(user => {
         let i = 0;
         this.exam?.questions.forEach(ques => {
+          let score = -1;
+          if (ques.options !== '') {
+            if (ques.answer === this.getStuAnswer(this.formGroup.get(ques.id.toString())?.value, ques.options)) {
+              score = points;
+            } else {
+              score = 0;
+            }
+          }
           const answerStatus = {
             student: {
               id: user.student.id
@@ -91,7 +100,9 @@ export class ExamingComponent implements OnInit {
               id: ques.id
             },
             stuAnswer: this.getStuAnswer(this.formGroup.get(ques.id.toString())?.value, ques.options),
-            correctAnswer: ques.answer
+            correctAnswer: ques.answer,
+            points,
+            score
           } as AnswerStatus;
           this.answerStatusService.save(answerStatus).subscribe(res => {
             i++;

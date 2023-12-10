@@ -6,4 +6,6 @@ public interface AnswerStatusService {
     AnswerStatus save(AnswerStatus answerStatus);
 
     Iterable<AnswerStatus> getAllByExamIdAndStudentId(Long examId, Long studentId);
+
+    AnswerStatus saveScoreById(Long answerStatusId, Long score);
 }

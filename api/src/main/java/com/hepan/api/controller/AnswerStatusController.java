@@ -2,7 +2,6 @@ package com.hepan.api.controller;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.hepan.api.entity.AnswerStatus;
-import com.hepan.api.entity.Course;
 import com.hepan.api.service.AnswerStatusService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -36,12 +35,22 @@ public class AnswerStatusController {
         return this.answerStatusService.getAllByExamIdAndStudentId(examId, studentId);
     }
 
+    @JsonView(getAllByExamIdAndStudentIdJsonView.class)
+    @GetMapping("saveScoreById/{answerStatusId}")
+    public AnswerStatus saveScoreById(
+            @RequestParam(required = false, defaultValue = "") Long score,
+            @PathVariable Long answerStatusId) {
+        return this.answerStatusService.saveScoreById(answerStatusId, score);
+    }
+
     private interface getAllByExamIdAndStudentIdJsonView extends
             AnswerStatus.IdJsonView,
             AnswerStatus.ExamJsonView,
             AnswerStatus.StudentJsonView,
             AnswerStatus.QuestionJsonView,
             AnswerStatus.StuAnswerJsonView,
-            AnswerStatus.CorrectAnswerJsonView
+            AnswerStatus.CorrectAnswerJsonView,
+            AnswerStatus.PointsJsonView,
+            AnswerStatus.ScoreJsonView
     {}
 }

@@ -77,6 +77,7 @@ export class MyExamComponent implements OnInit {
           } as unknown as AnswerStatusOfExam;
           this.AnswerStatusesOfExams.push(tmp);
           this.getAnswerStatusesOfExamsSuccess = true;
+          console.log('AnswerStatusesOfExams', this.AnswerStatusesOfExams);
       });
     });
   }
@@ -137,6 +138,33 @@ export class MyExamComponent implements OnInit {
     this.AnswerStatusesOfExams.forEach(item => {
       if (item.exam?.id === examId && item.answerStatuses !== undefined) {
         this.isAnswerCompletedKey = (item.answerStatuses?.length > 0);
+      }
+    });
+  }
+
+  objectiveTotalScore: number = 0;
+  subjectiveTotalScore: number = 0;
+  subjectiveFinishCorrect: boolean = true;
+
+  getScore(examId: number) {
+    this.objectiveTotalScore = 0;
+    this.subjectiveTotalScore = 0;
+    this.subjectiveFinishCorrect = true;
+    // @ts-ignore
+    this.AnswerStatusesOfExams.forEach(item => {
+      if (item.exam?.id === examId) {
+        console.log('getScore answerStatuses', item.answerStatuses);
+        item.answerStatuses?.forEach(answerStatus => {
+          if (answerStatus.question.options !== '') {
+            this.objectiveTotalScore = this.objectiveTotalScore + answerStatus.score;
+          } else {
+            if (answerStatus.score === -1) {
+              this.subjectiveFinishCorrect = false;
+            } else {
+              this.subjectiveTotalScore = this.subjectiveTotalScore + answerStatus.score;
+            }
+          }
+        });
       }
     });
   }

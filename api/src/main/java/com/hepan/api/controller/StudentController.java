@@ -11,6 +11,8 @@ import org.springframework.data.web.SortDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("student")
 public class StudentController {
@@ -36,6 +38,15 @@ public class StudentController {
             @SortDefault.SortDefaults(@SortDefault(sort = "id", direction = Sort.Direction.DESC))
             Pageable pageable) {
         return this.studentService.page(name, sno, pageable);
+    }
+
+    @GetMapping("pageByClazzIds")
+    @JsonView(PageJsonView.class)
+    public Page<Student> pageByClazzIds(
+            @RequestParam(required = false, defaultValue = "") List<Long> clazzIds,
+            @SortDefault.SortDefaults(@SortDefault(sort = "id", direction = Sort.Direction.DESC))
+            Pageable pageable) {
+        return this.studentService.pageByClazzIds(clazzIds, pageable);
     }
 
     /**

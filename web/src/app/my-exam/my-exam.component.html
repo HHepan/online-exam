@@ -26,6 +26,7 @@
       <th>题目总数</th>
       <th>满分</th>
       <th>时间</th>
+      <th>主观题得分 + 客观题得分 = 总分</th>
       <th>状态</th>
       <th>操作</th>
     </tr>
@@ -37,6 +38,24 @@
       <td>{{ exam.questionCount }}</td>
       <td>{{ exam.score }}</td>
       <td>{{ exam.startTime | date: 'yyyy-MM-dd HH:mm'}} - {{ exam.endTime | date: 'yyyy-MM-dd HH:mm'}}</td>
+      <td>
+        <ng-container *ngIf="AnswerStatusesOfExams.length === pageData.content.length">
+          {{ getScore(exam.id) }}
+          <ng-container *ngIf="isAnswerCompletedKey">
+            {{ subjectiveTotalScore }} +
+            <ng-container *ngIf="subjectiveFinishCorrect">
+              {{ objectiveTotalScore }}
+            </ng-container>
+            <ng-container *ngIf="!subjectiveFinishCorrect">
+              <label style="color: darkorange">待完成批改</label>
+            </ng-container>
+            = {{ subjectiveTotalScore + objectiveTotalScore }}
+          </ng-container>
+          <ng-container *ngIf="!isAnswerCompletedKey">
+            -
+          </ng-container>
+        </ng-container>
+      </td>
       <td>
         <ng-container *ngIf="AnswerStatusesOfExams.length === pageData.content.length">
           {{ isAnswerCompleted(exam.id) }}

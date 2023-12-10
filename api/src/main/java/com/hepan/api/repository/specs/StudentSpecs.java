@@ -3,6 +3,8 @@ package com.hepan.api.repository.specs;
 import com.hepan.api.entity.Student;
 import org.springframework.data.jpa.domain.Specification;
 
+import java.util.List;
+
 public class StudentSpecs {
     /**
      * 包含名字.
@@ -22,6 +24,15 @@ public class StudentSpecs {
         if (sno != null) {
             return (root, criteriaQuery, criteriaBuilder) ->
                     criteriaBuilder.like(root.get("sno").as(String.class), String.format("%%%s%%", sno));
+        } else {
+            return Specification.where(null);
+        }
+    }
+
+    public static Specification<Student> containingClazzIds(List<Long> clazzIds) {
+        if (clazzIds != null) {
+            return (root, criteriaQuery, criteriaBuilder) ->
+                    root.get("clazz").get("id").in(clazzIds);
         } else {
             return Specification.where(null);
         }

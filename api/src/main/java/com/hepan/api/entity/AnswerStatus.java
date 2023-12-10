@@ -16,6 +16,12 @@ public class AnswerStatus {
     @JsonView(CorrectAnswerJsonView.class)
     private String correctAnswer;
 
+    @JsonView(ScoreJsonView.class)
+    private Long score;
+
+    @JsonView(PointsJsonView.class)
+    private Long points;
+
     @ManyToOne
     @JsonView(StudentJsonView.class)
     @JoinColumn(name = "student_id")
@@ -47,6 +53,14 @@ public class AnswerStatus {
 
     public void setStudent(Student student) { this.student = student; }
 
+    public Long getScore() { return score; }
+
+    public void setScore(Long score) { this.score = score; }
+
+    public Long getPoints() { return points; }
+
+    public void setPoints(Long points) { this.points = points; }
+
     public Exam getExam() { return exam; }
 
     public void setExam(Exam exam) { this.exam = exam; }
@@ -58,6 +72,8 @@ public class AnswerStatus {
     public interface IdJsonView {}
     public interface StuAnswerJsonView {}
     public interface CorrectAnswerJsonView {}
+    public interface ScoreJsonView {}
+    public interface PointsJsonView {}
     public interface StudentJsonView extends
             Student.IdJsonView,
             Student.NameJsonView

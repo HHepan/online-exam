@@ -14,4 +14,8 @@ export interface AnswerStatus {
   stuAnswer: string;
 
   correctAnswer: string;
+
+  score: number;
+
+  points: number;
 }

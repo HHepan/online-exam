@@ -9,6 +9,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class StudentServiceImpl implements StudentService {
     private StudentRepository studentRepository;
@@ -45,5 +47,10 @@ public class StudentServiceImpl implements StudentService {
         User user = student.getUser();
         this.studentRepository.deleteById(id);
         this.userRepository.delete(user);
+    }
+
+    @Override
+    public Page<Student> pageByClazzIds(List<Long> clazzIds, Pageable pageable) {
+        return this.studentRepository.findAllByClazzIds(clazzIds, pageable);
     }
 }
