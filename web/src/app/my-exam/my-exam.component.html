@@ -7,15 +7,15 @@
           <button type="submit" class="btn btn-info"><i class="fas fa-search"></i>查询</button>
         </form>
       </div>
-      <div class="col-4 text-right">
-        <a class="btn btn-link mr-2" (click)="onRefreshState()">刷新状态</a>
-      </div>
     </div>
   </div>
   <hr>
   <div class="row mb-2">
     <div class="col-6 text-left">
       <app-size [size]="pageData.size" (changeSize)="onSizeChange($event)"></app-size>
+    </div>
+    <div class="col-6 text-right">
+      <small style="color: grey">若时间到但考试状态未变更，请点击刷新&nbsp;&nbsp;&nbsp;</small>
     </div>
   </div>
   <table class="table table-striped mt-3">
@@ -38,16 +38,26 @@
       <td>{{ exam.score }}</td>
       <td>{{ exam.startTime | date: 'yyyy-MM-dd HH:mm'}} - {{ exam.endTime | date: 'yyyy-MM-dd HH:mm'}}</td>
       <td>
-      <span class="badge"
-            [ngClass]="{ 'badge-secondary': exam.state === 0,
+        <ng-container *ngIf="AnswerStatusesOfExams.length === pageData.content.length">
+          {{ isAnswerCompleted(exam.id) }}
+          <ng-container *ngIf="!isAnswerCompletedKey">
+            <span class="badge"
+                  [ngClass]="{ 'badge-secondary': exam.state === 0,
                          'badge-primary': exam.state === 1,
                          'badge-success': exam.state === 2,
                          'badge-danger': exam.state === 3}">
-        {{ exam.state | examState}}
-      </span>
+            {{ exam.state | examState}}
+          </span>
+          </ng-container>
+          <ng-container *ngIf="isAnswerCompletedKey">
+            <span class="badge badge-warning">已提交</span>
+          </ng-container>
+        </ng-container>
       </td>
       <td>
-        <a *ngIf="exam.state === 2" class="btn btn-sm btn-info" (click)="intoExaming(exam.id)">进入考试</a>
+        {{ isAnswerCompleted(exam.id) }}
+        <a *ngIf="exam.state === 2 && !isAnswerCompletedKey" class="btn btn-sm btn-info" (click)="intoExaming(exam.id)">进入考试</a>
+        <a *ngIf="exam.state === 3 || isAnswerCompletedKey" class="btn btn-sm btn-link" [routerLink]="'stu-view-exam/' + exam.id">查看详情</a>
       </td>
     </tr>
     </tbody>

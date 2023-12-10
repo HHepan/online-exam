@@ -32,9 +32,9 @@ public class Question {
     @JsonView(ExamsJsonView.class)
     private List<Exam> exams = new ArrayList<>();
 
-    @OneToOne( mappedBy = "question" )
+    @OneToMany( mappedBy = "question" )
     @JsonView(Student.AnswerStatusJsonView.class)
-    private AnswerStatus answerStatus;
+    private List<AnswerStatus> answerStatuses;
 
 
     public Long getId() { return id; }
@@ -61,12 +61,12 @@ public class Question {
 
     public void setExams(List<Exam> exams) { this.exams = exams; }
 
-    public AnswerStatus getAnswerStatus() {
-        return answerStatus;
+    public List<AnswerStatus> getAnswerStatuses() {
+        return answerStatuses;
     }
 
-    public void setAnswerStatus(AnswerStatus answerStatus) {
-        this.answerStatus = answerStatus;
+    public void setAnswerStatuses(List<AnswerStatus> answerStatuses) {
+        this.answerStatuses = answerStatuses;
     }
 
     public interface IdJsonView {}

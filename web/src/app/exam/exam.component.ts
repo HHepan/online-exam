@@ -43,6 +43,7 @@ export class ExamComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.onRefreshState();
     this.userService.getCurrentLoginUser().subscribe(user => {
       this.teacher = user.teacher;
       this.param.paramId = user.teacher.id;
@@ -139,14 +140,10 @@ export class ExamComponent implements OnInit {
 
   onRefreshState() {
     this.examService.refreshState().subscribe({
-        next: () => {
-          this.commonService.success(() => {
-          }, '刷新成功');
-        },
-        error: () => {
-          this.commonService.error(() => {
-          }, '刷新失败');
-        }
+      error: () => {
+        this.commonService.error(() => {
+        }, '考试状态刷新失败');
+      }
       }
     );
   }

@@ -16,16 +16,19 @@ public class AnswerStatus {
     @JsonView(CorrectAnswerJsonView.class)
     private String correctAnswer;
 
-    @OneToOne
+    @ManyToOne
     @JsonView(StudentJsonView.class)
+    @JoinColumn(name = "student_id")
     private Student student;
 
-    @OneToOne
+    @ManyToOne
     @JsonView(ExamJsonView.class)
+    @JoinColumn(name = "exam_id")
     private Exam exam;
 
-    @OneToOne
+    @ManyToOne
     @JsonView(QuestionJsonView.class)
+    @JoinColumn(name = "question_id")
     private Question question;
 
     public Long getId() { return id; }
@@ -50,7 +53,7 @@ public class AnswerStatus {
 
     public Question getQuestion() { return question; }
 
-    public void setQuestion(Question exam) { this.question = question; }
+    public void setQuestion(Question question) { this.question = question; }
 
     public interface IdJsonView {}
     public interface StuAnswerJsonView {}
@@ -61,9 +64,13 @@ public class AnswerStatus {
     {}
     public interface ExamJsonView extends
             Exam.IdJsonView,
-            Exam.NameJsonView
+            Exam.NameJsonView,
+            Exam.QuestionCountJsonView
     {}
     public interface QuestionJsonView extends
-            Question.IdJsonView
+            Question.IdJsonView,
+            Question.StemJsonView,
+            Question.OptionsJsonView,
+            Question.AnswerJsonView
     {}
 }

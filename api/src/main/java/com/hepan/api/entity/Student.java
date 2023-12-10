@@ -3,6 +3,8 @@ package com.hepan.api.entity;
 import com.fasterxml.jackson.annotation.JsonView;
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 public class Student {
     @Id
@@ -25,9 +27,9 @@ public class Student {
     @JsonView(UserJsonView.class)
     private User user;
 
-    @OneToOne( mappedBy = "student" )
+    @OneToMany( mappedBy = "student" )
     @JsonView(AnswerStatusJsonView.class)
-    private AnswerStatus answerStatus;
+    private List<AnswerStatus> answerStatuses;
 
     public Long getId() { return id; }
 
@@ -57,12 +59,12 @@ public class Student {
         this.user = user;
     }
 
-    public AnswerStatus getAnswerStatus() {
-        return answerStatus;
+    public List<AnswerStatus> getAnswerStatuses() {
+        return answerStatuses;
     }
 
-    public void setAnswerStatus(AnswerStatus answerStatus) {
-        this.answerStatus = answerStatus;
+    public void setAnswerStatuses(List<AnswerStatus> answerStatuses) {
+        this.answerStatuses = answerStatuses;
     }
 
     public interface IdJsonView {}
