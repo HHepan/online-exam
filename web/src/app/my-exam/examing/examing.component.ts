@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {ExamService} from "../../../service/exam.service";
 import {Exam} from "../../../entity/exam";
@@ -46,11 +46,7 @@ export class ExamingComponent implements OnInit {
       }, this.exam.endTime - this.currentMoment - 5 *  60 * 1000);
 
       setTimeout(() => {
-        this.onSave();
-        this.commonService.success(() => {
-          this.examService.refreshState();
-          this.router.navigateByUrl('my-exam').then();
-        }, '考试结束时间到，已为您自动提交');
+        this.onSave(true);
       }, this.exam.endTime - this.currentMoment);
     });
   }
@@ -75,9 +71,50 @@ export class ExamingComponent implements OnInit {
     return outputArray;
   }
 
-  onSave() {
+  onSave(isAuto: boolean) {
     const points = this.exam ? this.exam?.score / this.exam?.questionCount : 0;
-    this.commonService.confirm(() => {
+    if (!isAuto) {
+      this.commonService.confirm(() => {
+        this.userService.getCurrentLoginUser().subscribe(user => {
+          let i = 0;
+          this.exam?.questions.forEach(ques => {
+            let score = -1;
+            if (ques.options !== '') {
+              if (ques.answer === this.getStuAnswer(this.formGroup.get(ques.id.toString())?.value, ques.options)) {
+                score = points;
+              } else {
+                score = 0;
+              }
+            }
+            const answerStatus = {
+              student: {
+                id: user.student.id
+              },
+              exam: {
+                id: this.exam?.id
+              },
+              question: {
+                id: ques.id
+              },
+              stuAnswer: this.getStuAnswer(this.formGroup.get(ques.id.toString())?.value, ques.options),
+              correctAnswer: ques.answer,
+              points,
+              score
+            } as AnswerStatus;
+            this.answerStatusService.save(answerStatus).subscribe(res => {
+              i++;
+              if (i === this.exam?.questions.length) {
+                this.commonService.success(() => {
+                  this.router.navigateByUrl('my-exam').then();
+                }, '交卷成功');
+              }
+            }, () => {
+              this.commonService.error(() => {}, '交卷失败');
+            });
+          });
+        });
+      }, '即将交卷');
+    } else {
       this.userService.getCurrentLoginUser().subscribe(user => {
         let i = 0;
         this.exam?.questions.forEach(ques => {
@@ -109,14 +146,14 @@ export class ExamingComponent implements OnInit {
             if (i === this.exam?.questions.length) {
               this.commonService.success(() => {
                 this.router.navigateByUrl('my-exam').then();
-              }, '交卷成功');
+              }, '考试结束时间到，已为您自动提交');
             }
           }, () => {
             this.commonService.error(() => {}, '交卷失败');
           });
         });
       });
-    }, '即将交卷');
+    }
   }
 
   getStuAnswer(value: ɵGetProperty<ɵTypedOrUntyped<{}, ɵFormGroupRawValue<{}>, any>, string> | undefined, options: string) {
