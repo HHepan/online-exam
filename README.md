@@ -26,8 +26,15 @@ mysql       v5.7
 ### 教师端：设置和发布考试、评分、查看考试情况
 ![59034bd21ba43f08a87d52620431870](https://github.com/user-attachments/assets/35f540d4-025b-4d5d-8f0a-a69a96cbe741)
 ![af68d6a59e73fbd8a8534b7280a66bb](https://github.com/user-attachments/assets/e0bb78c9-43b7-46fa-8183-e151b39a4d35)
+![ec885d6f5f1a939eb736ed5a945b21f](https://github.com/user-attachments/assets/a9ab6ef4-297c-4a58-97c4-afa28017e6c2)
+
 
 ### 学生端：参加考试
+![2336a41fb0b3f594d41590e58ab8ff8](https://github.com/user-attachments/assets/43cc4501-f7b4-4d37-be33-7a8629b5059d)
+![6872d72c2f456227a01b2ded7ea2eac](https://github.com/user-attachments/assets/dbd57983-8d5a-4164-9d8c-6e057af16535)
+![def257cf7ad2e05a34e8492c6627d97](https://github.com/user-attachments/assets/bfd7baec-2af7-4af8-a265-efa1c1a5df41)
+![4df70a4b6a05953170b5279b5a57a01](https://github.com/user-attachments/assets/831b3c78-e0ce-41c0-8716-65e436185401)
+
 # 启动
 首先在本地准备好所需环境，将本项目克隆至本地。
 ### 启动前端 web
