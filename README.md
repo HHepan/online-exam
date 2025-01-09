@@ -15,7 +15,19 @@ Spring boot v3.2.0
 mysql       v5.7
 
 # 效果
+### 登录界面
+![c6b84f059a2fafb302cb0cb98f4ae07](https://github.com/user-attachments/assets/52e3a393-c2cc-42ae-a95a-7547ec9ccc30)
 
+### 管理员端：管理教师、班级、学生、课程、题库信息
+![e96f95842369056535aed8b2e38b410](https://github.com/user-attachments/assets/514c7ab4-1e45-424c-88e3-a7ffe9c8c3a8)
+![70697e7bbbac3c5679e7065699ca0e5](https://github.com/user-attachments/assets/b825ccbc-dacb-43c8-b020-86572a5ab6bf)
+![25abd99e8dadd32c35bad5862b3f9b9](https://github.com/user-attachments/assets/cf767503-4619-4b33-8480-b72ee14647df)
+
+### 教师端：设置和发布考试、评分、查看考试情况
+![59034bd21ba43f08a87d52620431870](https://github.com/user-attachments/assets/35f540d4-025b-4d5d-8f0a-a69a96cbe741)
+![af68d6a59e73fbd8a8534b7280a66bb](https://github.com/user-attachments/assets/e0bb78c9-43b7-46fa-8183-e151b39a4d35)
+
+### 学生端：参加考试
 # 启动
 首先在本地准备好所需环境，将本项目克隆至本地。
 ### 启动前端 web
