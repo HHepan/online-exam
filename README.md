@@ -17,5 +17,44 @@ mysql       v5.7
 # 效果
 
 # 启动
-## 启动前端 web
-## 启动后端 api
+首先在本地准备好所需环境，将本项目克隆至本地。
+### 启动前端 web
+项目根目录下执行：
+```
+cd web //去到 web 目录
+```
+```
+npm install //安装依赖
+```
+```
+ng s //或者 ng serve 启动前端
+```
+此时应该可以通过 http://localhost:4200 访问到项目的登录界面。
+### 启动 nginx
+不同系统下启动 nginx 的方式有所差别，这里不作统一叙述。注意 nginx 配置文件应按 documents/nginx.conf 配置。（或者直接用该文件替换本地配置文件）<br>
+nginx 启动成功后应该可以通过 http://localhost:8015 (此端口号在nginx.conf中配置)访问到项目的登录界面。
+### 部署 docker (启动 mysql 数据库)
+项目根目录下执行：
+```
+cd documents/docker //去到 docker 目录
+```
+```
+docker compose up //根据配置文件构建并运行 mysql 镜像
+```
+### 启动后端 api
+IDEA 打开 api 目录，会自动安装依赖，点击启动即可。（如图）
+![413614f17c776b060af782e04d6f0d6](https://github.com/user-attachments/assets/7f4a32e6-e2e3-44d6-a53c-f54901ef90fc)
+也可以通过在项目根目录下执行命令行：
+```
+cd api //去到 api 目录
+```
+```
+mvn install //安装依赖
+```
+```
+mvn spring-boot:run //启动项目
+```
+（请注意，命令行方式启动可能会存在版本对应问题）
+
+# 访问
+依照上述过程启动成功后，访问 http://localhost:8015 进入到登录界面，使用 [用户名 admin ，密码 admin] 即可以管理员身份登录系统。 
