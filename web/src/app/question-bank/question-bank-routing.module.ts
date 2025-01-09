@@ -5,6 +5,7 @@ import {DialogEntryComponent} from "../common/dialog-entry/dialog-entry.componen
 import {QuestionBankAddComponent} from "./question-bank-add/question-bank-add.component";
 import {QuestionBankEditComponent} from "./question-bank-edit/question-bank-edit.component";
 import {SetQuestionComponent} from "./set-question/set-question.component";
+import {SystemConfigComponent} from "../system-config/system-config.component";
 
 const routes: Routes = [
   {
@@ -26,6 +27,13 @@ const routes: Routes = [
         component: DialogEntryComponent,
         data: {
           component: QuestionBankEditComponent
+        }
+      },
+      {
+        path: 'systemConfig',
+        component: DialogEntryComponent,
+        data: {
+          component: SystemConfigComponent
         }
       }
     ]

@@ -3,9 +3,10 @@ import {FormControl, FormGroup} from "@angular/forms";
 import {Page} from "../common/page";
 import {environment} from "../../environments/environment";
 import {CommonService} from "../../service/common.service";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {QuestionBank} from "../../entity/questionBank";
 import {QuestionBankService} from "../../service/question-bank.service";
+import {SubjectsService} from "../../service/subjects.service";
 
 @Component({
   selector: 'app-question-bank',
@@ -33,8 +34,9 @@ export class QuestionBankComponent {
 
 
   constructor(private commonService: CommonService,
-              private route: ActivatedRoute,
-              private questionBankService: QuestionBankService) {
+              private questionBankService: QuestionBankService,
+              private subjectsService: SubjectsService,
+              private router: Router) {
   }
 
   ngOnInit(): void {
@@ -44,6 +46,8 @@ export class QuestionBankComponent {
     this.questionBankService.select(QuestionBankService.pageData).subscribe(data => {
       this.pageData = data;
     });
+    const route = this.router.url;
+    this.subjectsService.sentRootMessage(route);
   }
 
   /**

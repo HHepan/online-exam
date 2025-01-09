@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {SubjectsService} from "../../service/subjects.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-dashboard',
@@ -7,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() { }
+  constructor(private subjectsService: SubjectsService,
+              private router: Router) { }
 
   ngOnInit(): void {
+    const route = this.router.url;
+    this.subjectsService.sentRootMessage(route);
   }
 
 }

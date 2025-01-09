@@ -3,9 +3,10 @@ import {FormControl, FormGroup} from "@angular/forms";
 import {Page} from "../common/page";
 import {environment} from "../../environments/environment";
 import {CommonService} from "../../service/common.service";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {ClazzService} from "../../service/clazz.service";
 import {Clazz} from "../../entity/clazz";
+import {SubjectsService} from "../../service/subjects.service";
 
 @Component({
   selector: 'app-clazz',
@@ -35,7 +36,9 @@ export class ClazzComponent implements OnInit{
 
   constructor(private commonService: CommonService,
               private route: ActivatedRoute,
-              private clazzService: ClazzService) {
+              private clazzService: ClazzService,
+              private subjectsService: SubjectsService,
+              private router: Router) {
   }
 
   ngOnInit(): void {
@@ -45,6 +48,8 @@ export class ClazzComponent implements OnInit{
     this.clazzService.select(ClazzService.pageData).subscribe(data => {
       this.pageData = data;
     });
+    const route = this.router.url;
+    this.subjectsService.sentRootMessage(route);
   }
 
   /**
