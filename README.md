@@ -4,7 +4,7 @@
 
 # 环境
 ### 前端 web
-node v16.20.2
+node v16.20.2<br>
 angular v11.0.7
 ### 网络中间件
 nginx v1.24.0
