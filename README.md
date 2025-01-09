@@ -5,7 +5,7 @@
 # 环境
 ### 前端 web
 node v16.20.2<br>
-angular v11.0.7
+angular v16.2.5
 ### 网络中间件
 nginx v1.24.0
 ### 后端 api
