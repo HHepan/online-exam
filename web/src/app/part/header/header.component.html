@@ -4,13 +4,13 @@
   </a>
   <div class="collapse navbar-collapse">
     <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-      <li class="nav-item active" *ngIf="username === '管理员'">
+      <li class="nav-item active" *ngIf="username === 'admin'">
         <a class="nav-link small" routerLink="systemConfig">
           <span class="font-weight-light">系统设置</span>
         </a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link small" routerLink="personal">
+        <a class="nav-link small">
           <span class="font-weight-light">欢迎您  </span>
           <i class="fas fa-user-circle"></i>
           {{ username }}
@@ -26,4 +26,3 @@
   </div>
 </nav>
 <div class="color-line"></div>
-

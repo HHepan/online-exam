@@ -1,0 +1,38 @@
+.header {
+  position: fixed;
+  width: 100vw;
+  z-index: 100;
+}
+
+.menu {
+  position: fixed;
+  top: 4rem;
+  width: 13rem;
+}
+
+.content {
+  position: relative;
+  top: 4rem;
+  left: 13rem;
+  height: calc(100vh - 4rem);
+  width: calc(100% - 13rem);
+  overflow: auto;
+  padding-bottom: 3em;
+}
+
+.content > app-nav {
+  position: fixed;
+  width: 100%;
+  z-index: 100;
+}
+
+div.content > div {
+  margin-top: 3.9rem;
+}
+
+.toast {
+  position: absolute;
+  top: 7.5rem;
+  right: 20px;
+  background-color: rgba(255,255,255,0);
+}
