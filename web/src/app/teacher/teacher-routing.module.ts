@@ -4,6 +4,7 @@ import {TeacherComponent} from "./teacher.component";
 import {DialogEntryComponent} from "../common/dialog-entry/dialog-entry.component";
 import {TeacherAddComponent} from "./teacher-add/teacher-add.component";
 import {TeacherEditComponent} from "./teacher-edit/teacher-edit.component";
+import {SystemConfigComponent} from "../system-config/system-config.component";
 
 const routes: Routes = [
   {
@@ -25,6 +26,13 @@ const routes: Routes = [
         component: DialogEntryComponent,
         data: {
           component: TeacherEditComponent
+        }
+      },
+      {
+        path: 'systemConfig',
+        component: DialogEntryComponent,
+        data: {
+          component: SystemConfigComponent
         }
       }
     ]

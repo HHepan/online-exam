@@ -4,6 +4,7 @@ import {ClazzComponent} from "./clazz.component";
 import {DialogEntryComponent} from "../common/dialog-entry/dialog-entry.component";
 import {ClazzAddComponent} from "./clazz-add/clazz-add.component";
 import {ClazzEditComponent} from "./clazz-edit/clazz-edit.component";
+import {SystemConfigComponent} from "../system-config/system-config.component";
 
 const routes: Routes = [
   {
@@ -25,6 +26,13 @@ const routes: Routes = [
         component: DialogEntryComponent,
         data: {
           component: ClazzEditComponent
+        }
+      },
+      {
+        path: 'systemConfig',
+        component: DialogEntryComponent,
+        data: {
+          component: SystemConfigComponent
         }
       }
     ]

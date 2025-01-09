@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {environment} from '../../../environments/environment';
 import {UserService} from "../../../service/user.service";
+import {Router} from "@angular/router";
+import {SubjectsService} from "../../../service/subjects.service";
 
 @Component({
   selector: 'app-header',
@@ -10,9 +12,11 @@ import {UserService} from "../../../service/user.service";
 export class HeaderComponent implements OnInit {
   username: string = '';
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService,
+              private subjectsService: SubjectsService) { }
 
   readonly environment = environment;
+  currentRoute = '';
 
   ngOnInit(): void {
     this.userService.getCurrentLoginUser().subscribe(res => {
@@ -26,6 +30,10 @@ export class HeaderComponent implements OnInit {
         this.username = '管理员'
       }
     })
+    const subject = this.subjectsService.getSubject();
+    subject.subscribe(res => {
+      this.currentRoute = this.subjectsService.getRouteMessage();
+    });
   }
 
   logout() {

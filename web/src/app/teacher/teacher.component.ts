@@ -3,9 +3,10 @@ import {Page} from "../common/page";
 import {Teacher} from "../../entity/teacher";
 import {FormControl, FormGroup} from "@angular/forms";
 import {CommonService} from "../../service/common.service";
-import {ActivatedRoute, Params} from "@angular/router";
+import {ActivatedRoute, Params, Router} from "@angular/router";
 import {TeacherService} from "../../service/teacher.service";
 import {environment} from "../../environments/environment";
+import {SubjectsService} from "../../service/subjects.service";
 
 @Component({
   selector: 'app-teacher',
@@ -36,8 +37,9 @@ export class TeacherComponent implements OnInit{
 
 
   constructor(private commonService: CommonService,
-              private route: ActivatedRoute,
-              private teacherService: TeacherService) {
+              private teacherService: TeacherService,
+              private subjectsService: SubjectsService,
+              private router: Router) {
   }
 
   ngOnInit(): void {
@@ -47,6 +49,8 @@ export class TeacherComponent implements OnInit{
     this.teacherService.select(TeacherService.pageData).subscribe(data => {
       this.pageData = data;
     });
+    const route = this.router.url;
+    this.subjectsService.sentRootMessage(route);
   }
 
   /**

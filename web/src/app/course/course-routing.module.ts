@@ -6,6 +6,7 @@ import {TeacherAddComponent} from "../teacher/teacher-add/teacher-add.component"
 import {TeacherEditComponent} from "../teacher/teacher-edit/teacher-edit.component";
 import {CourseAddComponent} from "./course-add/course-add.component";
 import {CourseEditComponent} from "./course-edit/course-edit.component";
+import {SystemConfigComponent} from "../system-config/system-config.component";
 
 const routes: Routes = [
   {
@@ -27,6 +28,13 @@ const routes: Routes = [
         component: DialogEntryComponent,
         data: {
           component: CourseEditComponent
+        }
+      },
+      {
+        path: 'systemConfig',
+        component: DialogEntryComponent,
+        data: {
+          component: SystemConfigComponent
         }
       }
     ]

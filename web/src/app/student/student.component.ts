@@ -4,10 +4,11 @@ import {Page} from "../common/page";
 import {Teacher} from "../../entity/teacher";
 import {environment} from "../../environments/environment";
 import {CommonService} from "../../service/common.service";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {TeacherService} from "../../service/teacher.service";
 import {StudentService} from "../../service/student.service";
 import {Student} from "../../entity/student";
+import {SubjectsService} from "../../service/subjects.service";
 
 @Component({
   selector: 'app-student',
@@ -38,8 +39,9 @@ export class StudentComponent {
 
 
   constructor(private commonService: CommonService,
-              private route: ActivatedRoute,
-              private studentService: StudentService) {
+              private studentService: StudentService,
+              private subjectsService: SubjectsService,
+              private router: Router) {
   }
 
   ngOnInit(): void {
@@ -49,6 +51,8 @@ export class StudentComponent {
     this.studentService.select(StudentService.pageData).subscribe(data => {
       this.pageData = data;
     });
+    const route = this.router.url;
+    this.subjectsService.sentRootMessage(route);
   }
 
   /**

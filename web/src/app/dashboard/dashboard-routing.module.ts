@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {DashboardComponent} from './dashboard.component';
+import {DialogEntryComponent} from "../common/dialog-entry/dialog-entry.component";
+import {SystemConfigComponent} from "../system-config/system-config.component";
 
 const routes: Routes = [
   {
@@ -8,7 +10,16 @@ const routes: Routes = [
     component: DashboardComponent,
     data: {
       title: '欢迎您'
-    }
+    },
+    children: [
+      {
+        path: 'systemConfig',
+        component: DialogEntryComponent,
+        data: {
+          component: SystemConfigComponent
+        }
+      }
+    ]
   },
 ];
 

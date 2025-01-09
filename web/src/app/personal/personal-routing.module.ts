@@ -10,6 +10,7 @@ import {TeacherAddComponent} from "../teacher/teacher-add/teacher-add.component"
 import {TeacherEditComponent} from "../teacher/teacher-edit/teacher-edit.component";
 import {PersonalEditComponent} from "./personal-edit/personal-edit.component";
 import {UpdatePasswordComponent} from "./update-password/update-password.component";
+import {SystemConfigComponent} from "../system-config/system-config.component";
 
 const routes: Routes = [
   {
@@ -31,6 +32,13 @@ const routes: Routes = [
         component: DialogEntryComponent,
         data: {
           component: UpdatePasswordComponent
+        }
+      },
+      {
+        path: 'systemConfig',
+        component: DialogEntryComponent,
+        data: {
+          component: SystemConfigComponent
         }
       }
     ]
