@@ -4,15 +4,18 @@
 
 # 环境
 ### 前端 web
-node v16.20.2<br>
-angular v16.2.5
+node        v16.20.2<br>
+angular     v16.2.5
 ### 网络中间件
-nginx v1.24.0
+nginx       v1.24.0
 ### 后端 api
-Java 17
+Java        17<br>
+Spring boot v3.2.0
 ### 数据库
-mysql v5.7
+mysql       v5.7
 
 # 效果
 
 # 启动
+## 启动前端 web
+## 启动后端 api
