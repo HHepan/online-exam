@@ -79,7 +79,7 @@ docker compose up //根据配置文件构建并运行 mysql 镜像
 **IDEA** 打开 api 目录，会自动安装依赖，**点击启动**即可。如图：
 ![413614f17c776b060af782e04d6f0d6](https://github.com/user-attachments/assets/7f4a32e6-e2e3-44d6-a53c-f54901ef90fc)
 
-也可以通过在项目根目录下执行命令行：
+也可以通过在项目根目录下执行命令行启动：
 ```
 cd api //去到 api 目录
 ```
