@@ -51,7 +51,7 @@ ng s //或者 ng serve 启动前端
 
 nginx 启动成功后应该可以通过 http://localhost:8015 (此端口号在nginx.conf中配置)访问到项目的登录界面。
 
-### 3.部署 docker (启动 mysql 数据库)
+### 3.部署 docker (启动 mysql 镜像)
 项目根目录下执行：
 ```
 cd documents/docker //去到 docker 目录
