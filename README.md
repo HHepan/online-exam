@@ -1,4 +1,4 @@
-# 概述
+## 概述
 河北工业大学-人工智能与数据科学学院-物联网工程-2023年秋-软件工程实验 
 
 实验题目为《**计算机专业课程在线考试管理系统**》，题目描述如下：
@@ -21,7 +21,7 @@
 ![屏幕截图 2025-06-04 132221](https://github.com/user-attachments/assets/a54aad01-1136-455f-acac-577fa05ae06c)
 
 
-# 环境
+## 环境
 前端 web ：【node v16.20.2】【angular v16.2.5】
 
 网络中间件 ：【nginx v1.24.0】
@@ -30,10 +30,10 @@
 
 数据库 ：【mysql v5.7】
 
-# 如何启动
+## 如何启动
 首先在本地准备好所需环境，将本项目克隆至本地。
 
-### 1.启动前端 web
+### 启动前端 web
 项目根目录下执行：
 ```
 cd web //去到 web 目录
@@ -46,12 +46,12 @@ ng s //或者 ng serve 启动前端
 ```
 启动成功后应该可以通过 http://localhost:4200 访问到项目的登录界面。
 
-### 2.启动 nginx
+### 启动 nginx
 不同系统下启动 nginx 的方式有所差别，这里不作统一叙述。注意 nginx 配置文件应按 documents/nginx.conf 配置。（或者直接用该文件替换本地配置文件）
 
 nginx 启动成功后应该可以通过 http://localhost:8015 (此端口号在nginx.conf中配置)访问到项目的登录界面。
 
-### 3.部署 docker (启动 mysql 镜像)
+### 部署 docker (启动 mysql 镜像)
 项目根目录下执行：
 ```
 cd documents/docker //去到 docker 目录
@@ -59,7 +59,7 @@ cd documents/docker //去到 docker 目录
 ```
 docker compose up //根据配置文件构建并运行 mysql 镜像
 ```
-### 4.构建数据库连接并创建 Schema
+### 构建数据库连接并创建 Schema
 打开 **DataGrip** 新建 DataSource，选择 mysql，如图：
 ![屏幕截图 2025-06-04 133208](https://github.com/user-attachments/assets/c61e8eeb-cc38-49c0-8aed-cd668743fdf3)
 
@@ -75,7 +75,7 @@ docker compose up //根据配置文件构建并运行 mysql 镜像
 ![屏幕截图 2025-06-04 135255](https://github.com/user-attachments/assets/0a6b7ebc-d73e-4eed-b55a-59f567d401c9)
 
 
-### 5.启动后端 api
+### 启动后端 api
 **IDEA** 打开 api 目录，会自动安装依赖，**点击启动**即可。如图：
 ![413614f17c776b060af782e04d6f0d6](https://github.com/user-attachments/assets/7f4a32e6-e2e3-44d6-a53c-f54901ef90fc)
 
@@ -90,7 +90,7 @@ mvn install //安装依赖
 mvn spring-boot:run //启动项目（请注意，命令行方式启动可能会存在版本对应问题）
 ```
 
-# 访问
+## 访问
 依照上述过程启动成功后，访问 http://localhost:8015 进入到登录界面。
 
 使用 【用户名 admin ，密码 admin】 即可以管理员身份登录系统。 
