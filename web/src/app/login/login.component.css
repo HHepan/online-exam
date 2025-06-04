@@ -6,10 +6,10 @@
   border-bottom: 1px solid #D4B68B;
 }
 .main {
-  height: 640px;
+  height: 560px;
   background: #fbfbfb;
   position: relative;
-  min-width: 1100px;
+  min-width: 1000px;
 }
 
 .main-login-warp {
@@ -23,8 +23,8 @@
   color: #3F4069;
 }
 .login {
-  width: 400px;
-  height: 540px;
+  width: 350px;
+  height: 460px;
   top: 50px;
   right: 10px;
   text-align: left;
